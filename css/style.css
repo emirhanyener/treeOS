@@ -1,6 +1,11 @@
 body{
     padding: 10px 40px;
     margin: 0px;
+    font-family: sans-serif;
+}
+
+a{
+    text-decoration: none;
 }
 
 .menu{
@@ -12,7 +17,6 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: sans-serif;
 }
 
 .menu-item{
