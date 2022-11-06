@@ -5,9 +5,9 @@
         </a>
     </div>
     <div class="menu-item">              
-        <a class="menu-item-right" style="color:white;background-color: #13a313;border-radius: 45px;" href="masaustu.php">Masaüstüne Git</a>
-        <a class="menu-item-right" href="kayit.php">Kayıt Ol</a>
-        <a class="menu-item-right" href="giris.php">Giriş Yap</a>
-        <a class="menu-item-right" href="index.php">Anasayfa</a>
+        <a class="menu-item-right" style="color:white;background-color: #13a313;border-radius: 45px;" href="desktop.php">Desktop</a>
+        <a class="menu-item-right" href="register.php">Login</a>
+        <a class="menu-item-right" href="login.php">Register</a>
+        <a class="menu-item-right" href="index.php">Home</a>
     </div>
 </div>

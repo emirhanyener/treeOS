@@ -4,6 +4,7 @@ body{
 }
 
 .menu{
+    margin-bottom:50px;
     border-bottom: 25px solid rgb(114 50 12);
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
@@ -24,4 +25,13 @@ body{
     text-decoration: none;
     color:black;
     padding:15px;
+}
+
+.footer{
+    padding:15px;
+    margin-top:50px;
+    border-top: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
