@@ -1,6 +1,6 @@
 <div class="menu">
-    <div class="menu-item">
-        <a href="index.php" style="height:100px;">
+    <div class="menu-item" style="position:relative;">
+        <a href="index.php" style="height:100px;" id="logo">
             <img src="images/logo.png" height="100" class="" alt="logo">
         </a>
     </div>

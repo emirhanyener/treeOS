@@ -6,6 +6,7 @@ body{
 
 a{
     text-decoration: none;
+    color:black;
 }
 
 .menu{
@@ -38,4 +39,22 @@ a{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+#logo::after{  
+    transition: all 200ms;
+    opacity:0;
+    font-size:14px;
+    color:rgb(46, 20, 5);
+    position: absolute;
+    top:58px;
+    left:0px;
+    content: "treeOS";
+    background-color: rgb(114 50 12);
+    border: 3px solid rgb(80, 34, 8);
+    border-radius: 1px;
+}
+
+#logo:hover::after{  
+    opacity: 1;
 }
