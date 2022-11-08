@@ -6,8 +6,8 @@
     </div>
     <div class="menu-item">              
         <a class="menu-item-right" style="color:white;background-color: #13a313;border-radius: 45px;" href="desktop.php">Desktop</a>
-        <a class="menu-item-right" href="register.php">Login</a>
-        <a class="menu-item-right" href="login.php">Register</a>
+        <a class="menu-item-right" href="login.php">Login</a>
+        <a class="menu-item-right" href="register.php">Register</a>
         <a class="menu-item-right" href="index.php">Home</a>
     </div>
 </div>
