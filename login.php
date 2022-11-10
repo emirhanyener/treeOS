@@ -1,4 +1,4 @@
-<?php $title = "Register"; ?>
+<?php $title = "Login"; ?>
 <html>
 <?php include("head.php"); ?>
 <?php 
