@@ -9,6 +9,18 @@ a{
     color:black;
 }
 
+td{
+    padding: 10px;
+}
+
+pageheader{
+    font-size: 48px;
+    display: flex;
+    padding: 10px 0px;
+    margin: 15px 0px;
+    border-bottom: 1px solid lightblue;
+}
+
 .menu{
     margin-bottom:50px;
     border-bottom: 25px solid rgb(114 50 12);
@@ -57,4 +69,52 @@ a{
 
 #logo:hover::after{  
     opacity: 1;
+}
+
+.input-text{
+    padding:10px;
+    border-radius: 3px;
+    border: 1px solid rgb(12, 114, 173);
+}
+.form-label{
+    padding:5px;
+}
+
+.input-button{
+    width: 100%;
+    padding:15px;
+    border-radius: 50px;
+    border: 1px solid green;
+    cursor: pointer;
+}
+
+.bg-c-r{
+    background-color: rgb(175, 13, 13);
+}
+.bg-c-g{
+    background-color: rgb(10, 197, 10);
+}
+.bg-c-b{
+    background-color: rgb(51, 162, 236);
+}
+
+.c-w{
+    color:white;
+}
+.c-r{
+    color: rgb(129, 9, 9);
+}
+.c-g{
+    color: rgb(31, 160, 31);
+}
+.c-b{
+    color: rgb(47, 120, 168);
+}
+
+.form-table{
+}
+
+.center-form{
+    display: flex;
+    justify-content: center;
 }
