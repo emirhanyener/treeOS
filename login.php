@@ -21,24 +21,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php
         if($_SESSION["login"] == 1){
     ?>
-        already logged<br>
-        <?php echo $_SESSION["username"]; ?> <br>
-        <?php echo $_SESSION["usermail"]; ?> <br>
+        <pageheader>Login</pageheader>
+        Already logged<br>
         <?php 
             if($_SESSION["userisadmin"] == 1){
                 echo "user is admin";
             } 
         ?> <br>
-        <a href = "logout.php">Logout</a>
+        <a href = "logout.php" class="c-r">Logout</a>
     <?php
     } else {
     ?>
-        <form action="login.php"  method="POST">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username"><br>
-            <label for="pass" class="form-label">Password</label>
-            <input type="text" class="form-control" id="pass" name="pass"><br>
-            <input type="submit" class="form-control" value="Login">
+        <pageheader>Login</pageheader>
+        <form action="login.php" class="center-form" method="POST">
+            <table class="form-table">
+                <tr><td><label for="username" class="form-label">Username: </label></td>
+                <td><input type="text" class="input-text" id="username" name="username"></td></tr>
+                <tr><td><label for="pass" class="form-label">Password: </label></td>
+                <td><input type="text" class="input-text" style="-webkit-text-security: disc;" id="pass" name="pass"></td></tr>
+                <tr><td colspan="2"><input type="submit" class="input-button bg-c-b c-w" value="Login"></td><tr>
+            </table>
         </form>
     <?php
     }
