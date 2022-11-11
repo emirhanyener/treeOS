@@ -1,4 +1,8 @@
-<?php error_reporting(E_ERROR | E_PARSE); session_start(); include("db.php"); ?>
+<?php
+    error_reporting(E_ERROR | E_PARSE); 
+    session_start(); 
+    include("db.php"); 
+?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
