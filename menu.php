@@ -7,7 +7,7 @@
     <div class="menu-item">
         <a class="menu-item-right" style="color:white;background-color: #13a313;border-radius: 45px;" href="desktop.php">Desktop</a>
         <?php
-            if($_SESSION["login"] == 1){
+            if(isset($_SESSION["login"])){
                 echo '<a class="menu-item-right" href="user.php">'.$_SESSION["username"].'</a>';
             } else {
         ?>
