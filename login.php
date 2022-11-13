@@ -22,11 +22,6 @@
         ?>
             <pageheader>Login</pageheader>
             Already logged<br>
-            <?php
-                if($_SESSION["userisadmin"] == 1){
-                    echo "user is admin";
-                }
-            ?>
             <br>
             <a href = "logout.php" class="c-r">Logout</a>
         <?php
