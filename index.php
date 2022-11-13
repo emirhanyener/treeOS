@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>treeOS</title>
-</head>
+<?php $title = "Home"; ?>
+<html>
+<?php include("head.php"); ?>
 <body>
-    <div class="container">
+    <?php include("menu.php"); ?>
 
-    </div>
+        <pageheader>Welcome</pageheader>
+        <p>treeOS is a virtual file management system on web.</p>
+        <p><a href="login.php" style="color:blue;">Login</a> and upload files</p>
+
+    <?php include("footer.php"); ?>
 </body>
 </html>
