@@ -1,7 +1,10 @@
 body{
-    padding: 10px 40px;
     margin: 0px;
     font-family: sans-serif;
+}
+
+.container{
+    padding: 10px 40px;
 }
 
 a{
@@ -114,4 +117,10 @@ pageheader{
 .center-form{
     display: flex;
     justify-content: center;
+}
+
+#application{
+    width: 100vw;
+    height: 100vh;
+    background-color: aqua;
 }
