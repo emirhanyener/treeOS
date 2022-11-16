@@ -4,12 +4,14 @@
         include("head.php");
     ?>
     <body>
-        <?php
-            include("menu.php"); 
-        ?>
-        
-        <?php
-            include("footer.php");
-        ?>
+        <div class="container">
+            <?php
+                include("menu.php"); 
+            ?>
+            
+            <?php
+                include("footer.php");
+            ?>
+        </div>
     </body>
 </html>
