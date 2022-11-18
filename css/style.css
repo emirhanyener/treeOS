@@ -118,9 +118,3 @@ pageheader{
     display: flex;
     justify-content: center;
 }
-
-#application{
-    width: 100vw;
-    height: 100vh;
-    background-color: aqua;
-}
