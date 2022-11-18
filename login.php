@@ -12,7 +12,9 @@
                 $_SESSION["userisadmin"] = $query["is_admin"];
                 header("Location: index.php");
             }
-            header("Location: login.php");
+            else{
+                header("Location: login.php");
+            }
         }
     ?>
     <body>
