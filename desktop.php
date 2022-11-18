@@ -6,5 +6,7 @@
     <body>
         <canvas id="application"></canvas>
     </body>
-    <script src="js/app.js"></script>
+    <?php
+        include("js/appscript.php");
+    ?>
 </html>
