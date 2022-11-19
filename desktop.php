@@ -3,13 +3,14 @@
     <?php
         include("head.php");
     ?>
+    <body>
     <?php
         if(isset($_SESSION["login"])){
+            $files = $db->query("select * from files where user_id={$_SESSION['userid']}");
     ?>
-    <body>
         <canvas id="application"></canvas>
-    </body>
     <?php
+        include("js/appscript.php");
         } else {
     ?>
     <div class="container">
@@ -17,6 +18,6 @@
     </div>
     <?php
         }
-        include("js/appscript.php");
     ?>
+    </body>
 </html>
