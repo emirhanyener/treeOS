@@ -17,4 +17,13 @@
     <?php
         }
     ?>
+    
+    function drop(e){
+        e.preventDefault();
+        console.log("dropped");
+    }
+    function allow_drop(e){
+        e.preventDefault();
+        console.log("dragging");
+    }
 </script>
