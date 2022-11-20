@@ -8,7 +8,9 @@
         if(isset($_SESSION["login"])){
             $files = $db->query("select * from files where user_id={$_SESSION['userid']}");
     ?>
-        <canvas id="application"></canvas>
+        <form action="index.php" ondrop="drop(event)" ondragover="allow_drop(event)" method="post">
+            <canvas id="application"></canvas>
+        </form>
     <?php
         include("js/appscript.php");
         } else {
