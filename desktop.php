@@ -8,7 +8,7 @@
         if(isset($_SESSION["login"])){
             $files = $db->query("select * from files where user_id={$_SESSION['userid']}");
     ?>
-        <form action="file_upload.php" ondrop="drop(event)" ondragover="allow_drop(event)" method="post">
+        <form style="margin:0px;" action="file_upload.php" ondrop="drop(event)" ondragover="allow_drop(event)" method="post">
             <canvas id="application"></canvas>
         </form>
     <?php
