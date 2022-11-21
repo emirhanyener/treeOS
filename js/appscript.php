@@ -25,6 +25,9 @@
         form_data.append('file', file_obj);
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "file_upload.php", true);
+        xhttp.onload = function(event) {
+            window.location.href = "desktop.php";
+        }
  
         xhttp.send(form_data);
     }
