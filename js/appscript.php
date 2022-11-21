@@ -20,10 +20,15 @@
     
     function drop(e){
         e.preventDefault();
-        console.log("dropped");
+        file_obj = e.dataTransfer.files[0];
+        var form_data = new FormData();                  
+        form_data.append('file', file_obj);
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "file_upload.php", true);
+ 
+        xhttp.send(form_data);
     }
     function allow_drop(e){
         e.preventDefault();
-        console.log("dragging");
     }
 </script>
