@@ -50,8 +50,8 @@
         pointer.pointer_position_y = e.clientY;
         if(pointer.is_dragging){
             if(selected_file != -1){
-                files[selected_file].position_x = pointer.pointer_position_x;
-                files[selected_file].position_y = pointer.pointer_position_y;
+                files[selected_file].position_x = pointer.pointer_position_x - (75 / 2);
+                files[selected_file].position_y = pointer.pointer_position_y - (100 / 2);
             }
         }
         refresh();
@@ -63,8 +63,8 @@
         pointer.click_position_y = pointer.pointer_position_y;
 
         for(let i = 0; i < files.length; i++){
-            if(pointer.click_position_x > files[i].position_x - 50 && pointer.click_position_x < files[i].position_x + 50){
-                if(pointer.click_position_y > files[i].position_y - 50 && pointer.click_position_y < files[i].position_y + 50){
+            if(pointer.click_position_x > files[i].position_x && pointer.click_position_x < files[i].position_x + 75){
+                if(pointer.click_position_y > files[i].position_y && pointer.click_position_y < files[i].position_y + 100){
                     if(pointer.is_dragging && selected_file == -1){
                         selected_file = i;
                         break;
