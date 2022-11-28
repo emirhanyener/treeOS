@@ -5,6 +5,8 @@
 
     var pointer = {
         is_dragging: false,
+        click_position_x: 0,
+        click_position_y: 0,
         pointer_position_x: 0,
         pointer_position_y: 0
     };
@@ -22,30 +24,58 @@
             }
         ?>
     ];
+    var selected_file = -1;
 
 
 	document.addEventListener('mousemove', pointer_stats);
 	document.addEventListener('mousedown', switch_drag);
 	document.addEventListener('mouseup', switch_drag);
 
+    refresh();
+    function refresh(){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    ctx.fillStyle = "#000000";
-    ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
-    files.forEach(item => {
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fillRect(item.position_x, item.position_y, 75, 100);
-        ctx.font = "20px Arial";
-        ctx.fillText(item.filename, item.position_x, item.position_y + 130);
-    });
+        ctx.fillStyle = "#000000";
+        ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
+        files.forEach(item => {
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(item.position_x, item.position_y, 75, 100);
+            ctx.font = "20px Arial";
+            ctx.fillText(item.filename, item.position_x, item.position_y + 130);
+        });
+    }
         
     function pointer_stats(e){
         pointer.pointer_position_x = e.clientX;
         pointer.pointer_position_y = e.clientY;
-        console.log(pointer);
+        if(pointer.is_dragging){
+            if(selected_file != -1){
+                files[selected_file].position_x = pointer.pointer_position_x;
+                files[selected_file].position_y = pointer.pointer_position_y;
+            }
+        }
+        refresh();
     }
     function switch_drag(){
         pointer.is_dragging = !pointer.is_dragging;
+
+        pointer.click_position_x = pointer.pointer_position_x;
+        pointer.click_position_y = pointer.pointer_position_y;
+
+        for(let i = 0; i < files.length; i++){
+            if(pointer.click_position_x > files[i].position_x - 50 && pointer.click_position_x < files[i].position_x + 50){
+                if(pointer.click_position_y > files[i].position_y - 50 && pointer.click_position_y < files[i].position_y + 50){
+                    if(pointer.is_dragging && selected_file == -1){
+                        selected_file = i;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if(!pointer.is_dragging){
+            selected_file = -1;
+        }
     }
     
     function drop(e){
