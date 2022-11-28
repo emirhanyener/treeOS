@@ -3,20 +3,30 @@
     var canvas = document.getElementById("application");
     var ctx = canvas.getContext("2d");
 
+    const files = [
+        <?php
+            foreach($files as $item){
+        ?>
+        {
+            filename: "<?php echo $item['file_name'] ?>",
+            position_x: <?php echo $item["position_x"] ?>,
+            position_y: <?php echo $item["position_y"] ?>
+        },
+        <?php
+            }
+        ?>
+    ];
+
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     ctx.fillStyle = "#000000";
     ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
-    <?php
-        foreach($files as $item){
-    ?>
+    files.forEach(item => {
         ctx.fillStyle = "#FFFFFF";
-        ctx.fillRect(<?php echo $item["position_x"]; ?>,<?php echo $item["position_y"]; ?>,75,100);
+        ctx.fillRect(item.position_x, item.position_y, 75, 100);
         ctx.font = "20px Arial";
-        ctx.fillText("<?php echo $item['file_name']; ?>", <?php echo $item["position_x"]; ?>, <?php echo $item["position_y"] + 130; ?>);
-    <?php
-        }
-    ?>
+        ctx.fillText(item.filename, item.position_x, item.position_y + 130);
+    });
     
     function drop(e){
         e.preventDefault();
