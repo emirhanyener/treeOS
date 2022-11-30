@@ -1,4 +1,3 @@
-
 <script>
     var canvas = document.getElementById("application");
     var ctx = canvas.getContext("2d");
@@ -93,5 +92,19 @@
     }
     function allow_drop(e){
         e.preventDefault();
+    }
+
+    setInterval(save_desktop_fn, 5000);
+
+    function save_desktop_fn(){
+        files.forEach(item => {
+            var form_data = new FormData();
+            form_data.append('filename', item.filename);
+            form_data.append('position_x', item.position_x);
+            form_data.append('position_y', item.position_y);
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "save_desktop.php", true);
+            xhttp.send(form_data);
+        });
     }
 </script>
