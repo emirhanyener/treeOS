@@ -107,4 +107,15 @@
             xhttp.send(form_data);
         });
     }
+
+    function open_file(){
+        for(let i = 0; i < files.length; i++){
+            if(pointer.click_position_x > files[i].position_x && pointer.click_position_x < files[i].position_x + 75){
+                if(pointer.click_position_y > files[i].position_y && pointer.click_position_y < files[i].position_y + 100){
+                    window.open("uploads/"+files[i].filename, "_blank");
+                    break;
+                }
+            }
+        }
+    }
 </script>
