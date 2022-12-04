@@ -15,7 +15,7 @@
             foreach($files as $item){
         ?>
         {
-            filename: "<?php echo $item['file_name'] ?>",
+            filename: "<?php echo explode('_', $item['file_name'])[1]; ?>",
             position_x: <?php echo $item["position_x"] ?>,
             position_y: <?php echo $item["position_y"] ?>
         },
