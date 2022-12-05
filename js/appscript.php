@@ -1,11 +1,17 @@
 <script>
     var canvas = document.getElementById("application");
     var ctx = canvas.getContext("2d");
+
     var img = new Image();
     img.src = 'images/file_icon.png';
+
     var is_context_menu_active = false;
     var selected_context_menu_file = -1;
     var selected_file = -1;
+
+	document.addEventListener('mousemove', pointer_stats);
+	document.addEventListener('mousedown', switch_drag);
+	document.addEventListener('mouseup', switch_drag);
 
     var pointer = {
         is_dragging: false,
@@ -29,22 +35,18 @@
         ?>
     ];
 
-
-	document.addEventListener('mousemove', pointer_stats);
-	document.addEventListener('mousedown', switch_drag);
-	document.addEventListener('mouseup', switch_drag);
-
     refresh();
     function refresh(){
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+
         ctx.fillStyle = "#000000";
         ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
         ctx.fillStyle = "#303030";
         ctx.font = "28px Arial";
         ctx.fillText("<?php echo $_SESSION['username']; ?>'s desktop", 20, 40);
+
         files.forEach(item => {
-            //ctx.fillRect(item.position_x, item.position_y, 75, 100);
             ctx.drawImage(img, item.position_x, item.position_y, 70, 100);
             ctx.fillStyle = "#111111";
             ctx.font = "16px Arial";
@@ -59,12 +61,14 @@
     function pointer_stats(e){
         pointer.pointer_position_x = e.clientX;
         pointer.pointer_position_y = e.clientY;
+
         if(pointer.is_dragging){
             if(selected_file != -1){
                 files[selected_file].position_x = pointer.pointer_position_x - (75 / 2);
                 files[selected_file].position_y = pointer.pointer_position_y - (100 / 2);
             }
         }
+
         refresh();
     }
     function switch_drag(){
@@ -95,8 +99,10 @@
     function drop(e){
         e.preventDefault();
         file_obj = e.dataTransfer.files[0];
+
         var form_data = new FormData();                  
         form_data.append('file', file_obj);
+
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "file_upload.php", true);
         xhttp.onload = function(event) {
@@ -110,12 +116,12 @@
     }
 
     function save_desktop_fn(){
-        console.log("saved");
         files.forEach(item => {
             var form_data = new FormData();
             form_data.append('filename', item.filename);
             form_data.append('position_x', item.position_x);
             form_data.append('position_y', item.position_y);
+
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", "save_desktop.php", true);
             xhttp.send(form_data);
