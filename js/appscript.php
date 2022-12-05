@@ -3,7 +3,9 @@
     var ctx = canvas.getContext("2d");
     var img = new Image();
     img.src = 'images/file_icon.png';
-
+    var is_context_menu_active = false;
+    var selected_context_menu_file = -1;
+    var selected_file = -1;
 
     var pointer = {
         is_dragging: false,
@@ -26,7 +28,6 @@
             }
         ?>
     ];
-    var selected_file = -1;
 
 
 	document.addEventListener('mousemove', pointer_stats);
@@ -138,6 +139,9 @@
         for(let i = 0; i < files.length; i++){
             if(pointer.click_position_x > files[i].position_x && pointer.click_position_x < files[i].position_x + 75){
                 if(pointer.click_position_y > files[i].position_y && pointer.click_position_y < files[i].position_y + 100){
+                    is_context_menu_active = true;
+                    selected_context_menu_file = i;
+
                     ctx.fillStyle = "#FFFFFF";
                     ctx.fillRect(pointer.click_position_x, pointer.click_position_y, 100, 60);
                     ctx.fillStyle = "#404040";
