@@ -134,5 +134,20 @@
 
     window.addEventListener('contextmenu', (event) => {
         event.preventDefault();
+
+        for(let i = 0; i < files.length; i++){
+            if(pointer.click_position_x > files[i].position_x && pointer.click_position_x < files[i].position_x + 75){
+                if(pointer.click_position_y > files[i].position_y && pointer.click_position_y < files[i].position_y + 100){
+                    ctx.fillStyle = "#FFFFFF";
+                    ctx.fillRect(pointer.click_position_x, pointer.click_position_y, 100, 60);
+                    ctx.fillStyle = "#999999";
+                    ctx.rect(pointer.click_position_x, pointer.click_position_y, 100, 150);
+                    ctx.font = "16px Arial";
+                    ctx.fillText("Delete", pointer.click_position_x + 5, pointer.click_position_y + 20);
+                    ctx.fillText("Rename", pointer.click_position_x + 5, pointer.click_position_y + 50);
+                    break;
+                }
+            }
+        }
     });
 </script>
