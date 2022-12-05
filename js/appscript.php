@@ -1,6 +1,9 @@
 <script>
     var canvas = document.getElementById("application");
     var ctx = canvas.getContext("2d");
+    var img = new Image();
+    img.src = 'images/file_icon.png';
+
 
     var pointer = {
         is_dragging: false,
@@ -15,7 +18,7 @@
             foreach($files as $item){
         ?>
         {
-            filename: "<?php echo explode('_', $item['file_name'])[1]; ?>",
+            filename: "<?php echo $item['file_name']; ?>",
             position_x: <?php echo $item["position_x"] ?>,
             position_y: <?php echo $item["position_y"] ?>
         },
@@ -73,6 +76,9 @@
         }
         
         if(!pointer.is_dragging){
+            if(selected_file != -1){
+                save_desktop_fn();
+            }
             selected_file = -1;
         }
     }
@@ -94,9 +100,8 @@
         e.preventDefault();
     }
 
-    setInterval(save_desktop_fn, 5000);
-
     function save_desktop_fn(){
+        console.log("saved");
         files.forEach(item => {
             var form_data = new FormData();
             form_data.append('filename', item.filename);
