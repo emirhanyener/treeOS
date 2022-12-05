@@ -40,8 +40,13 @@
         ctx.fillStyle = "#000000";
         ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
         files.forEach(item => {
+            //ctx.fillRect(item.position_x, item.position_y, 75, 100);
+            ctx.drawImage(img, item.position_x, item.position_y, 70, 100);
+            ctx.fillStyle = "#111111";
+            ctx.font = "16px Arial";
+            ctx.fillText(item.filename.split(".")[1], item.position_x + 5, item.position_y + 15);
+            
             ctx.fillStyle = "#FFFFFF";
-            ctx.fillRect(item.position_x, item.position_y, 75, 100);
             ctx.font = "20px Arial";
             ctx.fillText(item.filename, item.position_x, item.position_y + 130);
         });
