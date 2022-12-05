@@ -35,10 +35,13 @@
 
     refresh();
     function refresh(){
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
         ctx.fillStyle = "#000000";
         ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
+        ctx.fillStyle = "#303030";
+        ctx.font = "28px Arial";
+        ctx.fillText("<?php echo $_SESSION['username']; ?>'s desktop", 20, 40);
         files.forEach(item => {
             //ctx.fillRect(item.position_x, item.position_y, 75, 100);
             ctx.drawImage(img, item.position_x, item.position_y, 70, 100);
@@ -128,4 +131,8 @@
             }
         }
     }
+
+    window.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+    });
 </script>
