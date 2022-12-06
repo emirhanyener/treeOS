@@ -53,7 +53,7 @@
             
             ctx.fillStyle = "#FFFFFF";
             ctx.font = "20px Arial";
-            ctx.fillText(item.filename.split("_")[1], item.position_x, item.position_y + 130);
+            ctx.fillText(item.filename.split("_")[2], item.position_x, item.position_y + 130);
         });
 
         if(selected_context_menu_file != -1){
