@@ -118,6 +118,15 @@
             selected_file = -1;
             selected_context_menu_file = -1;
         }
+
+        if(selected_context_menu_file != -1){
+            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30){
+                //remove file
+            }
+            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y + 30 && pointer.pointer_position_y <= pointer.click_position_y + 60){
+                //rename file
+            }
+        }
         
         refresh();
     }
