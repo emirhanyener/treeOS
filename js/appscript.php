@@ -59,9 +59,8 @@
         if(selected_context_menu_file != -1){
             ctx.font = "16px Arial";
 
-            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100)
-                if(pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30)    
-                    ctx.fillStyle = "#DFDFDF";
+            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30)
+                ctx.fillStyle = "#DFDFDF";
             else
                 ctx.fillStyle = "#FFFFFF";
             ctx.fillRect(pointer.click_position_x, pointer.click_position_y, 100, 30);
@@ -69,9 +68,8 @@
             ctx.fillText("Delete", pointer.click_position_x + 5, pointer.click_position_y + 20);
             ctx.rect(pointer.click_position_x, pointer.click_position_y, 100, 30);
 
-            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100)
-                if(pointer.pointer_position_y >= pointer.click_position_y + 30 && pointer.pointer_position_y <= pointer.click_position_y + 60)    
-                    ctx.fillStyle = "#DFDFDF";
+            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y + 30 && pointer.pointer_position_y <= pointer.click_position_y + 60)  
+                ctx.fillStyle = "#DFDFDF";
             else
                 ctx.fillStyle = "#FFFFFF";
             ctx.fillRect(pointer.click_position_x, pointer.click_position_y + 30, 100, 30);
