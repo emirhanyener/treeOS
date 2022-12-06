@@ -118,3 +118,11 @@ pageheader{
     display: flex;
     justify-content: center;
 }
+
+.rename-div{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: white;
+    padding: 10px;
+}

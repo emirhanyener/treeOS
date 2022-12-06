@@ -110,7 +110,7 @@
                 xhttp.send(form_data);
             }
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y + 30 && pointer.pointer_position_y <= pointer.click_position_y + 60){
-                //rename
+                document.getElementById("body").innerHTML = "<div class='rename-div'><form action='rename_file.php' method='POST'><table><tr><td>From</td><td><input type='text' name = 'filename' value = '" + files[selected_context_menu_file].filename.split("_")[2] + "' readable></td></tr><tr><td>To</td><td><input type='text' name = 'tofilename' value = '" + files[selected_context_menu_file].filename.split("_")[2] + "'></td></tr><tr><td><input type='submit' value='Rename'></td></tr></table></form></div>";
             }
             
             selected_context_menu_file = -1;
