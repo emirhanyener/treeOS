@@ -121,7 +121,17 @@
 
         if(selected_context_menu_file != -1){
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30){
-                //remove file
+                
+                var form_data = new FormData();                  
+                form_data.append('filename', files[selected_context_menu_file].filename);
+
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("POST", "delete_file.php", true);
+                xhttp.onload = function(event) {
+                    window.location.href = "desktop.php";
+                }
+        
+                xhttp.send(form_data);
             }
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y + 30 && pointer.pointer_position_y <= pointer.click_position_y + 60){
                 //rename file
