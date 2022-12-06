@@ -5,7 +5,6 @@
     var img = new Image();
     img.src = 'images/file_icon.png';
 
-    var is_context_menu_active = false;
     var selected_context_menu_file = -1;
     var selected_file = -1;
 
@@ -56,6 +55,32 @@
             ctx.font = "20px Arial";
             ctx.fillText(item.filename.split("_")[1], item.position_x, item.position_y + 130);
         });
+
+        if(selected_context_menu_file != -1){
+            ctx.font = "16px Arial";
+
+            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100)
+                if(pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30)    
+                    ctx.fillStyle = "#DFDFDF";
+            else
+                ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(pointer.click_position_x, pointer.click_position_y, 100, 30);
+            ctx.fillStyle = "#999999";
+            ctx.fillText("Delete", pointer.click_position_x + 5, pointer.click_position_y + 20);
+            ctx.rect(pointer.click_position_x, pointer.click_position_y, 100, 30);
+
+            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100)
+                if(pointer.pointer_position_y >= pointer.click_position_y + 30 && pointer.pointer_position_y <= pointer.click_position_y + 60)    
+                    ctx.fillStyle = "#DFDFDF";
+            else
+                ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(pointer.click_position_x, pointer.click_position_y + 30, 100, 30);
+            ctx.fillStyle = "#999999";
+            ctx.fillText("Rename", pointer.click_position_x + 5, pointer.click_position_y + 50);
+            ctx.rect(pointer.click_position_x, pointer.click_position_y + 30, 100, 30);
+
+            ctx.stroke();
+        }
     }
         
     function pointer_stats(e){
@@ -93,7 +118,10 @@
                 save_desktop_fn();
             }
             selected_file = -1;
+            selected_context_menu_file = -1;
         }
+        
+        refresh();
     }
     
     function drop(e){
@@ -145,24 +173,12 @@
         for(let i = 0; i < files.length; i++){
             if(pointer.click_position_x > files[i].position_x && pointer.click_position_x < files[i].position_x + 75){
                 if(pointer.click_position_y > files[i].position_y && pointer.click_position_y < files[i].position_y + 100){
-                    is_context_menu_active = true;
                     selected_context_menu_file = i;
-
-                    ctx.fillStyle = "#FFFFFF";
-                    ctx.fillRect(pointer.click_position_x, pointer.click_position_y, 100, 60);
-                    ctx.fillStyle = "#404040";
-                    ctx.rect(pointer.click_position_x, pointer.click_position_y, 100, 60);
-                    ctx.stroke();
-                    ctx.font = "16px Arial";
-                    ctx.fillText("Delete", pointer.click_position_x + 5, pointer.click_position_y + 20);
-                    ctx.beginPath();
-                    ctx.moveTo(pointer.click_position_x, pointer.click_position_y + 30);
-                    ctx.lineTo(pointer.click_position_x + 100, pointer.click_position_y + 30);
-                    ctx.stroke();
-                    ctx.fillText("Rename", pointer.click_position_x + 5, pointer.click_position_y + 50);
                     break;
                 }
             }
         }
+        
+        refresh();
     });
 </script>
