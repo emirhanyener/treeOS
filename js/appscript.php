@@ -46,14 +46,23 @@
         ctx.fillText("<?php echo $_SESSION['username']; ?>'s desktop", 20, 40);
 
         files.forEach(item => {
-            ctx.drawImage(img, item.position_x, item.position_y, 70, 100);
+            if(item.filename.split(".")[1] == "png" || item.filename.split(".")[1] == "jpg"){
+                let fileimage = new Image();
+                fileimage.src = "uploads/" + item.filename;
+                ctx.drawImage(fileimage, item.position_x, item.position_y, 70, 100); 
+            }
+            else{
+                ctx.drawImage(img, item.position_x, item.position_y, 70, 100);
+            }
+            ctx.fillStyle = "#A0D0F0";
+            ctx.fillRect(item.position_x, item.position_y, 47, 20)
             ctx.fillStyle = "#111111";
             ctx.font = "16px Arial";
             ctx.fillText(item.filename.split(".")[1], item.position_x + 5, item.position_y + 15);
             
             ctx.fillStyle = "#FFFFFF";
             ctx.font = "20px Arial";
-            ctx.fillText(item.filename.split("_")[2], item.position_x, item.position_y + 130);
+            ctx.fillText(item.filename.split("_")[2].split(".")[0], item.position_x, item.position_y + 130);
         });
 
         if(selected_context_menu_file != -1){
