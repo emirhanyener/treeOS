@@ -92,7 +92,7 @@
                 if(item.isfolder == 0){
                     ctx.fillText((item.filename.split("_")[2].split(".")[0].length > 6 ? item.filename.split("_")[2].split(".")[0].substring(0,6) + "." : item.filename.split("_")[2].split(".")[0]) + "." + item.filename.split("_")[2].split(".")[1], item.position_x + (item.filename.split("_")[2].split(".")[0].length >= 6 ? - 15 : + 0), item.position_y + 130);
                 } else {
-                    ctx.fillText((item.filename.length > 6 ? item.filename.substring(0,6) + "..." : item.filename), item.position_x + (item.filename.length >= 6 ? - 15 : + 0), item.position_y + 130);
+                    ctx.fillText((item.filename.length > 10 ? item.filename.substring(0,10) + "..." : item.filename), item.position_x + (item.filename.length >= 10 ? - 15 : + 0), item.position_y + 130);
                 }
             }
         });
