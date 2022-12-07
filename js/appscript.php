@@ -129,10 +129,13 @@
 
         refresh();
     }
+    function close_center_div(){
+        document.getElementById("body").innerHTML = "";
+    }
     function switch_drag(){
         if(desktop_context_menu_active){
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 110 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30){
-                console.log("folder created");
+                document.getElementById("body").innerHTML = "<div class='center-div'><h3>Create Folder</h3><hr><form action='create_folder.php' method='POST'><table><tr><td>Folder Name</td><td><input type='text' name = 'foldername'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Create'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='button' onclick='close_center_div()' value='Close'></td></tr></table></form></div>";
             }
             desktop_context_menu_active = false;
         }
@@ -143,7 +146,7 @@
                 document.getElementById("body").innerHTML = "";
             }
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y + 30 && pointer.pointer_position_y <= pointer.click_position_y + 60){
-                document.getElementById("body").innerHTML = "<div class='rename-div'><h3>Rename File</h3><hr><form action='rename_file.php' method='POST'><table><tr><td><input name='filename' type='hidden' value = '" + files[selected_context_menu_file].filename + "'></td></tr><tr><td>From</td><td>" + files[selected_context_menu_file].filename.split("_")[2] + "</td></tr><tr><td>To</td><td><input type='text' name = 'tofilename' value = '" + files[selected_context_menu_file].filename.split("_")[2] + "'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Rename'></td></tr></table></form></div>";
+                document.getElementById("body").innerHTML = "<div class='center-div'><h3>Rename File</h3><hr><form action='rename_file.php' method='POST'><table><tr><td><input name='filename' type='hidden' value = '" + files[selected_context_menu_file].filename + "'></td></tr><tr><td>From</td><td>" + files[selected_context_menu_file].filename.split("_")[2] + "</td></tr><tr><td>To</td><td><input type='text' name = 'tofilename' value = '" + files[selected_context_menu_file].filename.split("_")[2] + "'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Rename'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='button' onclick='close_center_div()' value='Close'></td></tr></table></form></div>";
             }
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y + 60 && pointer.pointer_position_y <= pointer.click_position_y + 90){
                 var form_data = new FormData();                  
