@@ -231,19 +231,20 @@
                     if(pointer.click_position_x >= files[i].position_x - 20 && pointer.click_position_x <= files[i].position_x + 90){
                         if(pointer.click_position_y >= files[i].position_y - 5 && pointer.click_position_y <= files[i].position_y + 140){
                             if(files[i].isfolder == 1 && i != selected_file){
-                                
-                                var form_data = new FormData();
-                                form_data.append('foldername', files[i].filename);
-                                form_data.append('filename', files[selected_file].filename);
+                                if(opened_folder == files[i].foldername){
+                                    var form_data = new FormData();
+                                    form_data.append('foldername', files[i].filename);
+                                    form_data.append('filename', files[selected_file].filename);
 
-                                var xhttp = new XMLHttpRequest();
-                                xhttp.open("POST", "add_to_folder.php", true);
-                                xhttp.onload = function(event) {
-                                    window.location.href = "desktop.php";
+                                    var xhttp = new XMLHttpRequest();
+                                    xhttp.open("POST", "add_to_folder.php", true);
+                                    xhttp.onload = function(event) {
+                                        window.location.href = "desktop.php";
+                                    }
+                            
+                                    xhttp.send(form_data);
+                                    break;
                                 }
-                        
-                                xhttp.send(form_data);
-                                break;
                             }
                         }
                     }
