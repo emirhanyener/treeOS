@@ -7,7 +7,7 @@
     }
     $filename = $_SESSION["userid"].'_'.time().'_'.$_FILES['file']['name'];
 
-    $query = $db->query("INSERT INTO files (file_name,position_x,position_y,user_id) VALUES ('".$filename."',100,100,'".$_SESSION["userid"]."')", PDO::FETCH_ASSOC);
+    $query = $db->query("INSERT INTO files (file_name,position_x,position_y,user_id) VALUES ('".$filename."',".$_POST["position_x"].",".$_POST["position_y"].",'".$_SESSION["userid"]."')", PDO::FETCH_ASSOC);
 
     move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/'.$filename);
       

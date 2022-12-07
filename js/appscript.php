@@ -191,8 +191,10 @@
         e.preventDefault();
         file_obj = e.dataTransfer.files[0];
 
-        var form_data = new FormData();                  
+        var form_data = new FormData();
         form_data.append('file', file_obj);
+        form_data.append('position_x', e.clientX);
+        form_data.append('position_y', e.clientY);
 
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "file_upload.php", true);
