@@ -10,6 +10,7 @@
     var desktop_context_menu_active = false;
     var selected_context_menu_file = -1;
     var selected_file = -1;
+    var opened_folder = "";
 
 	document.addEventListener('mousemove', pointer_stats);
 	document.addEventListener('mousedown', switch_drag);
@@ -63,11 +64,11 @@
         }
 
         files.forEach(item => {
-            if(pointer.pointer_position_x >= item.position_x - 20 && pointer.pointer_position_x <= item.position_x + 90 && pointer.pointer_position_y >= item.position_y - 5 && pointer.pointer_position_y <= item.position_y + 140){   
-                ctx.fillStyle = "#3368";
-                ctx.fillRect(item.position_x - 20, item.position_y - 5, 110, 145)
-            }
-            if(item.foldername == ""){
+            if(item.foldername == opened_folder){
+                if(pointer.pointer_position_x >= item.position_x - 20 && pointer.pointer_position_x <= item.position_x + 90 && pointer.pointer_position_y >= item.position_y - 5 && pointer.pointer_position_y <= item.position_y + 140){   
+                    ctx.fillStyle = "#3368";
+                    ctx.fillRect(item.position_x - 20, item.position_y - 5, 110, 145)
+                }
                 if(item.isfolder == 0){
                     if(item.filename.split(".")[1] == "png" || item.filename.split(".")[1] == "jpg"){
                         let fileimage = new Image();
@@ -242,7 +243,11 @@
         for(let i = 0; i < files.length; i++){
             if(pointer.click_position_x >= files[i].position_x - 20 && pointer.click_position_x <= files[i].position_x + 90){
                 if(pointer.click_position_y >= files[i].position_y - 5 && pointer.click_position_y <= files[i].position_y + 140){
-                    window.open("uploads/"+files[i].filename, "_blank");
+                    if(files[i].isfolder == 0){
+                        window.open("uploads/"+files[i].filename, "_blank");
+                    } else {
+                        opened_folder = files[i].filename;
+                    }
                     break;
                 }
             }
