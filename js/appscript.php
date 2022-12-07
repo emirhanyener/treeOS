@@ -182,9 +182,11 @@
         }
         if(selected_context_menu_file != -1){
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30){
-                document.getElementById("body").innerHTML = "<a href='uploads/" + files[selected_context_menu_file].filename + "' download id='download-file-link' style='display:none;'>";
-                document.getElementById("download-file-link").click();
-                document.getElementById("body").innerHTML = "";
+                if(files[selected_context_menu_file].isfolder == 0){
+                    document.getElementById("body").innerHTML = "<a href='uploads/" + files[selected_context_menu_file].filename + "' download id='download-file-link' style='display:none;'>";
+                    document.getElementById("download-file-link").click();
+                    document.getElementById("body").innerHTML = "";
+                }
             }
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y + 30 && pointer.pointer_position_y <= pointer.click_position_y + 60){
                 document.getElementById("body").innerHTML = "<div class='center-div'><h3>Rename File</h3><hr><form action='rename_file.php' method='POST'><table><tr><td><input name='filename' type='hidden' value = '" + files[selected_context_menu_file].filename + "'></td></tr><tr><td>From</td><td>" + files[selected_context_menu_file].filename.split("_")[2] + "</td></tr><tr><td>To</td><td><input type='text' name = 'tofilename' value = '" + files[selected_context_menu_file].filename.split("_")[2] + "'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Rename'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='button' onclick='close_center_div()' value='Close'></td></tr></table></form></div>";
@@ -225,6 +227,27 @@
         
         if(!pointer.is_dragging){
             if(selected_file != -1){
+                for(let i = 0; i < files.length; i++){
+                    if(pointer.click_position_x >= files[i].position_x - 20 && pointer.click_position_x <= files[i].position_x + 90){
+                        if(pointer.click_position_y >= files[i].position_y - 5 && pointer.click_position_y <= files[i].position_y + 140){
+                            if(files[i].isfolder == 1 && i != selected_file){
+                                
+                                var form_data = new FormData();
+                                form_data.append('foldername', files[i].filename);
+                                form_data.append('filename', files[selected_file].filename);
+
+                                var xhttp = new XMLHttpRequest();
+                                xhttp.open("POST", "add_to_folder.php", true);
+                                xhttp.onload = function(event) {
+                                    window.location.href = "desktop.php";
+                                }
+                        
+                                xhttp.send(form_data);
+                                break;
+                            }
+                        }
+                    }
+                }
                 save_desktop_fn();
             }
             selected_file = -1;
