@@ -56,7 +56,11 @@
             ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
             ctx.fillStyle = "#222";
             ctx.fillRect(0,0,window.innerWidth,40);
-            ctx.fillStyle = "#F00";
+            if(pointer.pointer_position_x >= window.innerWidth - 100 && pointer.pointer_position_x <= window.innerWidth && pointer.pointer_position_y >= 0 && pointer.pointer_position_y <= 40){
+                ctx.fillStyle = "#F44";
+            } else {
+                ctx.fillStyle = "#F00";
+            }
             ctx.fillRect(window.innerWidth - 100,0,100,40);
             ctx.fillStyle = "#FFF";
             ctx.font = "20px Arial";
@@ -164,11 +168,17 @@
         document.getElementById("body").innerHTML = "";
     }
     function switch_drag(){
-        if(desktop_context_menu_active){
-            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 110 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30){
-                document.getElementById("body").innerHTML = "<div class='center-div'><h3>Create Folder</h3><hr><form action='create_folder.php' method='POST'><input type='hidden' name='position_x' value='" + pointer.click_position_x + "'><input type='hidden' name='position_y' value='" + pointer.click_position_y + "'><table><tr><td>Folder Name</td><td><input type='text' name = 'foldername'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Create'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='button' onclick='close_center_div()' value='Close'></td></tr></table></form></div>";
+        if(opened_folder != ""){
+            if(pointer.pointer_position_x >= window.innerWidth - 100 && pointer.pointer_position_x <= window.innerWidth && pointer.pointer_position_y >= 0 && pointer.pointer_position_y <= 40){
+                opened_folder = "";
             }
-            desktop_context_menu_active = false;
+        } else {
+            if(desktop_context_menu_active){
+                if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 110 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30){
+                    document.getElementById("body").innerHTML = "<div class='center-div'><h3>Create Folder</h3><hr><form action='create_folder.php' method='POST'><input type='hidden' name='position_x' value='" + pointer.click_position_x + "'><input type='hidden' name='position_y' value='" + pointer.click_position_y + "'><table><tr><td>Folder Name</td><td><input type='text' name = 'foldername'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Create'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='button' onclick='close_center_div()' value='Close'></td></tr></table></form></div>";
+                }
+                desktop_context_menu_active = false;
+            }
         }
         if(selected_context_menu_file != -1){
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30){
@@ -204,8 +214,10 @@
             if(pointer.click_position_x >= files[i].position_x - 20 && pointer.click_position_x <= files[i].position_x + 90){
                 if(pointer.click_position_y >= files[i].position_y - 5 && pointer.click_position_y <= files[i].position_y + 140){
                     if(pointer.is_dragging && selected_file == -1){
-                        selected_file = i;
-                        break;
+                        if(files[i].foldername == opened_folder){
+                            selected_file = i;
+                            break;
+                        }
                     }
                 }
             }
@@ -274,15 +286,19 @@
         event.preventDefault();
 
         for(let i = 0; i < files.length; i++){
-            if(pointer.click_position_x >= files[i].position_x - 20 && pointer.click_position_x <= files[i].position_x + 90){
-                if(pointer.click_position_y >= files[i].position_y - 5 && pointer.click_position_y <= files[i].position_y + 140){
-                    selected_context_menu_file = i;
-                    break;
+            if(opened_folder == files[i].foldername){
+                if(pointer.click_position_x >= files[i].position_x - 20 && pointer.click_position_x <= files[i].position_x + 90){
+                    if(pointer.click_position_y >= files[i].position_y - 5 && pointer.click_position_y <= files[i].position_y + 140){
+                        selected_context_menu_file = i;
+                        break;
+                    }
                 }
             }
         }
         if(selected_context_menu_file == -1){
-            desktop_context_menu_active = true;
+            if(opened_folder == ""){
+                desktop_context_menu_active = true;
+            }
         }
         
         refresh();
