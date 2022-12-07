@@ -46,6 +46,10 @@
         ctx.fillText("<?php echo $_SESSION['username']; ?>'s desktop", 20, 40);
 
         files.forEach(item => {
+            if(pointer.pointer_position_x >= item.position_x && pointer.pointer_position_x <= item.position_x + 70 && pointer.pointer_position_y >= item.position_y && pointer.pointer_position_y <= item.position_y + 100){   
+                ctx.fillStyle = "#111133";
+                ctx.fillRect(item.position_x - 20, item.position_y - 5, 110, 145)
+            }
             if(item.filename.split(".")[1] == "png" || item.filename.split(".")[1] == "jpg"){
                 let fileimage = new Image();
                 fileimage.src = "uploads/" + item.filename;
