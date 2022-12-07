@@ -41,13 +41,13 @@
 
         ctx.fillStyle = "#000000";
         ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
-        ctx.fillStyle = "#303030";
+        ctx.fillStyle = "#ADF8";
         ctx.font = "28px Arial";
         ctx.fillText("<?php echo $_SESSION['username']; ?>'s desktop", 20, 40);
 
         files.forEach(item => {
-            if(pointer.pointer_position_x >= item.position_x && pointer.pointer_position_x <= item.position_x + 70 && pointer.pointer_position_y >= item.position_y && pointer.pointer_position_y <= item.position_y + 100){   
-                ctx.fillStyle = "#111133";
+            if(pointer.pointer_position_x >= item.position_x - 20 && pointer.pointer_position_x <= item.position_x + 90 && pointer.pointer_position_y >= item.position_y - 5 && pointer.pointer_position_y <= item.position_y + 140){   
+                ctx.fillStyle = "#3368";
                 ctx.fillRect(item.position_x - 20, item.position_y - 5, 110, 145)
             }
             if(item.filename.split(".")[1] == "png" || item.filename.split(".")[1] == "jpg"){
@@ -58,8 +58,8 @@
             else{
                 ctx.drawImage(img, item.position_x, item.position_y, 70, 100);
             }
-            ctx.fillStyle = "#A0D0F0";
-            ctx.fillRect(item.position_x, item.position_y, 47, 20)
+            ctx.fillStyle = "#ADF8";
+            ctx.fillRect(item.position_x, item.position_y, 70, 20)
             ctx.fillStyle = "#111111";
             ctx.font = "16px Arial";
             ctx.fillText(item.filename.split(".")[1], item.position_x + 5, item.position_y + 15);
@@ -149,8 +149,8 @@
         pointer.click_position_y = pointer.pointer_position_y;
 
         for(let i = 0; i < files.length; i++){
-            if(pointer.click_position_x > files[i].position_x && pointer.click_position_x < files[i].position_x + 75){
-                if(pointer.click_position_y > files[i].position_y && pointer.click_position_y < files[i].position_y + 100){
+            if(pointer.click_position_x >= files[i].position_x - 20 && pointer.click_position_x <= files[i].position_x + 90){
+                if(pointer.click_position_y >= files[i].position_y - 5 && pointer.click_position_y <= files[i].position_y + 140){
                     if(pointer.is_dragging && selected_file == -1){
                         selected_file = i;
                         break;
@@ -203,8 +203,8 @@
 
     function open_file(){
         for(let i = 0; i < files.length; i++){
-            if(pointer.click_position_x > files[i].position_x && pointer.click_position_x < files[i].position_x + 75){
-                if(pointer.click_position_y > files[i].position_y && pointer.click_position_y < files[i].position_y + 100){
+            if(pointer.click_position_x >= files[i].position_x - 20 && pointer.click_position_x <= files[i].position_x + 90){
+                if(pointer.click_position_y >= files[i].position_y - 5 && pointer.click_position_y <= files[i].position_y + 140){
                     window.open("uploads/"+files[i].filename, "_blank");
                     break;
                 }
@@ -216,8 +216,8 @@
         event.preventDefault();
 
         for(let i = 0; i < files.length; i++){
-            if(pointer.click_position_x > files[i].position_x && pointer.click_position_x < files[i].position_x + 75){
-                if(pointer.click_position_y > files[i].position_y && pointer.click_position_y < files[i].position_y + 100){
+            if(pointer.click_position_x >= files[i].position_x - 20 && pointer.click_position_x <= files[i].position_x + 90){
+                if(pointer.click_position_y >= files[i].position_y - 5 && pointer.click_position_y <= files[i].position_y + 140){
                     selected_context_menu_file = i;
                     break;
                 }
