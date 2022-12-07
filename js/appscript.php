@@ -45,11 +45,27 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        ctx.fillStyle = "#000000";
-        ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
-        ctx.fillStyle = "#ADF8";
-        ctx.font = "28px Arial";
-        ctx.fillText("<?php echo $_SESSION['username']; ?>'s desktop", 20, 40);
+        if(opened_folder == ""){
+            ctx.fillStyle = "#000000";
+            ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
+            ctx.fillStyle = "#ADF8";
+            ctx.font = "28px Arial";
+            ctx.fillText("<?php echo $_SESSION['username']; ?>'s desktop", 20, 40);
+        } else {
+            ctx.fillStyle = "#333";
+            ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
+            ctx.fillStyle = "#222";
+            ctx.fillRect(0,0,window.innerWidth,40);
+            ctx.fillStyle = "#F00";
+            ctx.fillRect(window.innerWidth - 100,0,100,40);
+            ctx.fillStyle = "#FFF";
+            ctx.font = "20px Arial";
+            ctx.fillText("Close", window.innerWidth - 75, 27);
+            ctx.fillStyle = "#ADF";
+            ctx.font = "20px Arial";
+            ctx.fillText(opened_folder, 35, 27);
+            ctx.drawImage(folder_icon, 10, 10, 13, 20)
+        }
 
         if(desktop_context_menu_active){
             ctx.font = "16px Arial";
