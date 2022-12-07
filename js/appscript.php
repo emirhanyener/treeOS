@@ -4,6 +4,8 @@
 
     var img = new Image();
     img.src = 'images/file_icon.png';
+    var folder_icon = new Image();
+    folder_icon.src = 'images/folder_icon.png';
 
     var desktop_context_menu_active = false;
     var selected_context_menu_file = -1;
@@ -28,7 +30,9 @@
         {
             filename: "<?php echo $item['file_name']; ?>",
             position_x: <?php echo $item["position_x"] ?>,
-            position_y: <?php echo $item["position_y"] ?>
+            position_y: <?php echo $item["position_y"] ?>,
+            foldername: "<?php echo $item['foldername'] ?>",
+            isfolder: <?php echo $item["is_folder"] ?>
         },
         <?php
             }
@@ -63,25 +67,35 @@
                 ctx.fillStyle = "#3368";
                 ctx.fillRect(item.position_x - 20, item.position_y - 5, 110, 145)
             }
-            if(item.filename.split(".")[1] == "png" || item.filename.split(".")[1] == "jpg"){
-                let fileimage = new Image();
-                fileimage.src = "uploads/" + item.filename;
-                ctx.drawImage(fileimage, item.position_x, item.position_y, 70, 100); 
+            if(item.foldername == ""){
+                if(item.isfolder == 0){
+                    if(item.filename.split(".")[1] == "png" || item.filename.split(".")[1] == "jpg"){
+                        let fileimage = new Image();
+                        fileimage.src = "uploads/" + item.filename;
+                        ctx.drawImage(fileimage, item.position_x, item.position_y, 70, 100); 
+                    }
+                    else{
+                        ctx.drawImage(img, item.position_x, item.position_y, 70, 100);
+                    }
+                    
+                    ctx.fillStyle = "#ADF8";
+                    ctx.fillRect(item.position_x, item.position_y, 70, 20)
+                    ctx.fillStyle = "#111111";
+                    ctx.font = "16px Arial";
+                    ctx.fillText(item.filename.split(".")[1], item.position_x + 5, item.position_y + 15);
+                } else {
+                    ctx.drawImage(folder_icon, item.position_x, item.position_y, 70, 100);
+                }
+                
+                ctx.fillStyle = "#FFFFFF";
+                ctx.font = "18px Arial";
+                if(item.isfolder == 0){
+                    ctx.fillText((item.filename.split("_")[2].split(".")[0].length > 6 ? item.filename.split("_")[2].split(".")[0].substring(0,6) + "." : item.filename.split("_")[2].split(".")[0]) + "." + item.filename.split("_")[2].split(".")[1], item.position_x + (item.filename.split("_")[2].split(".")[0].length >= 6 ? - 15 : + 0), item.position_y + 130);
+                } else {
+                    ctx.fillText((item.filename.length > 6 ? item.filename.substring(0,6) + "..." : item.filename), item.position_x + (item.filename.length >= 6 ? - 15 : + 0), item.position_y + 130);
+                }
             }
-            else{
-                ctx.drawImage(img, item.position_x, item.position_y, 70, 100);
-            }
-            ctx.fillStyle = "#ADF8";
-            ctx.fillRect(item.position_x, item.position_y, 70, 20)
-            ctx.fillStyle = "#111111";
-            ctx.font = "16px Arial";
-            ctx.fillText(item.filename.split(".")[1], item.position_x + 5, item.position_y + 15);
-            
-            ctx.fillStyle = "#FFFFFF";
-            ctx.font = "18px Arial";
-            ctx.fillText((item.filename.split("_")[2].split(".")[0].length > 6 ? item.filename.split("_")[2].split(".")[0].substring(0,6) + "." : item.filename.split("_")[2].split(".")[0]) + "." + item.filename.split("_")[2].split(".")[1], item.position_x + (item.filename.split("_")[2].split(".")[0].length >= 6 ? - 15 : + 0), item.position_y + 130);
         });
-
         if(selected_context_menu_file != -1){
             ctx.font = "16px Arial";
 
@@ -135,7 +149,7 @@
     function switch_drag(){
         if(desktop_context_menu_active){
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 110 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30){
-                document.getElementById("body").innerHTML = "<div class='center-div'><h3>Create Folder</h3><hr><form action='create_folder.php' method='POST'><table><tr><td>Folder Name</td><td><input type='text' name = 'foldername'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Create'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='button' onclick='close_center_div()' value='Close'></td></tr></table></form></div>";
+                document.getElementById("body").innerHTML = "<div class='center-div'><h3>Create Folder</h3><hr><form action='create_folder.php' method='POST'><input type='hidden' name='position_x' value='" + pointer.click_position_x + "'><input type='hidden' name='position_y' value='" + pointer.click_position_y + "'><table><tr><td>Folder Name</td><td><input type='text' name = 'foldername'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Create'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='button' onclick='close_center_div()' value='Close'></td></tr></table></form></div>";
             }
             desktop_context_menu_active = false;
         }
