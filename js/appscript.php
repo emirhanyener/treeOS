@@ -5,6 +5,7 @@
     var img = new Image();
     img.src = 'images/file_icon.png';
 
+    var desktop_context_menu_active = false;
     var selected_context_menu_file = -1;
     var selected_file = -1;
 
@@ -44,6 +45,18 @@
         ctx.fillStyle = "#ADF8";
         ctx.font = "28px Arial";
         ctx.fillText("<?php echo $_SESSION['username']; ?>'s desktop", 20, 40);
+
+        if(desktop_context_menu_active){
+            ctx.font = "16px Arial";
+            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 110 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30)
+                ctx.fillStyle = "#DFFFDF";
+            else
+                ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(pointer.click_position_x, pointer.click_position_y, 110, 30);
+            ctx.fillStyle = "#333333";
+            ctx.fillText("Create Folder", pointer.click_position_x + 5, pointer.click_position_y + 20);
+            ctx.rect(pointer.click_position_x, pointer.click_position_y, 110, 30);
+        }
 
         files.forEach(item => {
             if(pointer.pointer_position_x >= item.position_x - 20 && pointer.pointer_position_x <= item.position_x + 90 && pointer.pointer_position_y >= item.position_y - 5 && pointer.pointer_position_y <= item.position_y + 140){   
@@ -117,7 +130,12 @@
         refresh();
     }
     function switch_drag(){
-
+        if(desktop_context_menu_active){
+            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 110 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30){
+                console.log("folder created");
+            }
+            desktop_context_menu_active = false;
+        }
         if(selected_context_menu_file != -1){
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30){
                 document.getElementById("body").innerHTML = "<a href='uploads/" + files[selected_context_menu_file].filename + "' download id='download-file-link' style='display:none;'>";
@@ -222,6 +240,9 @@
                     break;
                 }
             }
+        }
+        if(selected_context_menu_file == -1){
+            desktop_context_menu_active = true;
         }
         
         refresh();
