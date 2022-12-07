@@ -295,12 +295,14 @@
         for(let i = 0; i < files.length; i++){
             if(pointer.click_position_x >= files[i].position_x - 20 && pointer.click_position_x <= files[i].position_x + 90){
                 if(pointer.click_position_y >= files[i].position_y - 5 && pointer.click_position_y <= files[i].position_y + 140){
-                    if(files[i].isfolder == 0){
-                        window.open("uploads/"+files[i].filename, "_blank");
-                    } else {
-                        opened_folder = files[i].filename;
+                    if(opened_folder == files[i].foldername){
+                        if(files[i].isfolder == 0){
+                            window.open("uploads/"+files[i].filename, "_blank");
+                        } else {
+                            opened_folder = files[i].filename;
+                        }
+                        break;
                     }
-                    break;
                 }
             }
         }
