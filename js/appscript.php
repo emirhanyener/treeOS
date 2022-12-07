@@ -65,28 +65,28 @@
             ctx.fillText(item.filename.split(".")[1], item.position_x + 5, item.position_y + 15);
             
             ctx.fillStyle = "#FFFFFF";
-            ctx.font = "20px Arial";
-            ctx.fillText(item.filename.split("_")[2].split(".")[0], item.position_x, item.position_y + 130);
+            ctx.font = "18px Arial";
+            ctx.fillText((item.filename.split("_")[2].split(".")[0].length > 6 ? item.filename.split("_")[2].split(".")[0].substring(0,6) + "." : item.filename.split("_")[2].split(".")[0]) + "." + item.filename.split("_")[2].split(".")[1], item.position_x + (item.filename.split("_")[2].split(".")[0].length >= 6 ? - 15 : + 0), item.position_y + 130);
         });
 
         if(selected_context_menu_file != -1){
             ctx.font = "16px Arial";
 
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30)
-                ctx.fillStyle = "#DFDFDF";
+                ctx.fillStyle = "#FFDFDF";
             else
                 ctx.fillStyle = "#FFFFFF";
             ctx.fillRect(pointer.click_position_x, pointer.click_position_y, 100, 30);
-            ctx.fillStyle = "#999999";
+            ctx.fillStyle = "#333333";
             ctx.fillText("Delete", pointer.click_position_x + 5, pointer.click_position_y + 20);
             ctx.rect(pointer.click_position_x, pointer.click_position_y, 100, 30);
 
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y + 30 && pointer.pointer_position_y <= pointer.click_position_y + 60)  
-                ctx.fillStyle = "#DFDFDF";
+                ctx.fillStyle = "#FFDFDF";
             else
                 ctx.fillStyle = "#FFFFFF";
             ctx.fillRect(pointer.click_position_x, pointer.click_position_y + 30, 100, 30);
-            ctx.fillStyle = "#999999";
+            ctx.fillStyle = "#333333";
             ctx.fillText("Rename", pointer.click_position_x + 5, pointer.click_position_y + 50);
             ctx.rect(pointer.click_position_x, pointer.click_position_y + 30, 100, 30);
 
