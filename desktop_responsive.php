@@ -1,7 +1,8 @@
-<?php $title = "Desktop Responsive"; ?>
+<?php $title = "Desktop Responsive"; 
+session_start();
+?>
 <html>
     <?php include("head.php"); ?>
-    <body>
         <div class="container">
             <?php include("menu.php"); ?>    
             <?php
@@ -22,7 +23,7 @@
                                 continue;
                     ?>
                     <tr>
-                        <td><?php echo $item['file_name']; ?></td>
+                        <td><?php echo explode("_", $item['file_name'])[2]; ?></td>
                         <td><a href="<?php echo 'uploads/'.$item['file_name']; ?>" download>Download File</a></td>
                     </tr>
                     <?php
@@ -41,5 +42,4 @@
                 ?>
             <?php include("footer.php"); ?>
         </div>
-    </body>
 </html>
