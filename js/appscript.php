@@ -1,4 +1,7 @@
 <script>
+    if(window.innerWidth < 500){
+        window.location="desktop_responsive.php";
+    }
     var canvas = document.getElementById("application");
     var ctx = canvas.getContext("2d");
 
@@ -413,5 +416,11 @@
     refresh();
     setInterval(() => {
         refresh();
-    }, 500);
+    }, 2000);
+
+    window.onresize = function(event) {
+        if(window.innerWidth < 500){
+            window.location="desktop_responsive.php";
+        }
+    };
 </script>
