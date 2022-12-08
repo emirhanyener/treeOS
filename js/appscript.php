@@ -162,14 +162,24 @@
         
         if(settings_menu_active){
             ctx.font = "16px Arial";
-            if(pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 250 && pointer.pointer_position_y >= canvas.height - 30 && pointer.pointer_position_y <= canvas.height)
+            if(pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 270 && pointer.pointer_position_y >= canvas.height - 30 && pointer.pointer_position_y <= canvas.height)
                 ctx.fillStyle = "#DFFFDF";
             else
                 ctx.fillStyle = "#FFFFFF";
-            ctx.fillRect(70, canvas.height - 30, 180, 30);
+            ctx.fillRect(70, canvas.height - 30, 200, 30);
             ctx.fillStyle = "#333333";
             ctx.fillText("Change Desktop Name", 75, canvas.height - 10);
-            ctx.rect(80, canvas.height - 30, 150, 30);
+            ctx.rect(70, canvas.height - 30, 200, 30);
+
+            
+            if(pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 270 && pointer.pointer_position_y >= canvas.height - 60 && pointer.pointer_position_y <= canvas.height - 30)
+                ctx.fillStyle = "#DFFFDF";
+            else
+                ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(70, canvas.height - 60, 200, 30);
+            ctx.fillStyle = "#333333";
+            ctx.fillText("Change Background Color", 75, canvas.height - 40);
+            ctx.rect(70, canvas.height - 60, 200, 30);
         }
 
         if(pointer.pointer_position_x >= 0 && pointer.pointer_position_x <= 70 && pointer.pointer_position_y >= canvas.height - 80 && pointer.pointer_position_y <= canvas.height){
@@ -198,6 +208,7 @@
             ctx.fillText("Loading", window.innerWidth / 2 - 90, window.innerHeight / 2 + 50);
             ctx.drawImage(logo_icon, window.innerWidth / 2 - logo_icon.naturalWidth / 2, window.innerHeight / 2 - logo_icon.naturalHeight / 2, logo_icon.naturalWidth / 2, logo_icon.naturalHeight / 2)
         }
+        ctx.stroke();
     }
         
     function pointer_stats(e){
@@ -218,8 +229,11 @@
     }
     function switch_drag(){
         if(settings_menu_active){
-            if(pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 250 && pointer.pointer_position_y >= canvas.height - 30 && pointer.pointer_position_y <= canvas.height){
+            if(pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 270 && pointer.pointer_position_y >= canvas.height - 30 && pointer.pointer_position_y <= canvas.height){
                 console.log("change desktop name");
+            }
+            if(pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 270 && pointer.pointer_position_y >= canvas.height - 60 && pointer.pointer_position_y <= canvas.height - 30){
+                console.log("change background color");
             }
         }
         if(pointer.pointer_position_x >= 0 && pointer.pointer_position_x <= 70 && pointer.pointer_position_y >= canvas.height - 80 && pointer.pointer_position_y <= canvas.height){
