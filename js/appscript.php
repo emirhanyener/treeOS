@@ -58,7 +58,7 @@
             ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
             ctx.fillStyle = "#FFF8";
             ctx.font = "28px Arial";
-            ctx.fillText("<?php echo $_SESSION['username']; ?>'s desktop", 20, 40);
+            ctx.fillText("<?php echo ($user["desktop_name"] == "" ? $user["username"]."'s desktop" : $user["desktop_name"]); ?>", 20, 40);
         } else {
             ctx.fillStyle = "#333";
             ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
@@ -230,7 +230,7 @@
     function switch_drag(){
         if(settings_menu_active){
             if(pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 270 && pointer.pointer_position_y >= canvas.height - 30 && pointer.pointer_position_y <= canvas.height){
-                console.log("change desktop name");
+                document.getElementById("body").innerHTML = "<div class='center-div'><h3>Change Desktop Name</h3><hr><form action='change_desktop_name.php' method='POST'><table><tr><td>New Desktop Name</td><td><input type='text' name = 'desktopname'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Change'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='button' onclick='close_center_div()' value='Close'></td></tr></table></form></div>";
             }
             if(pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 270 && pointer.pointer_position_y >= canvas.height - 60 && pointer.pointer_position_y <= canvas.height - 30){
                 console.log("change background color");
