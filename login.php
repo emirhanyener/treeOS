@@ -1,4 +1,6 @@
-<?php $title = "Login"; ?>
+<?php $title = "Login"; 
+session_start();
+?>
 <html>
     <?php 
         include("head.php");
@@ -17,7 +19,6 @@
             }
         }
     ?>
-    <body>
         <div class="container">
             <?php 
                 include("menu.php");
@@ -47,5 +48,4 @@
                 include("footer.php");
             ?>
         </div>
-    </body>
 </html>

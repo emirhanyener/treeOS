@@ -7,11 +7,10 @@
     ?>
     <?php 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $query = $db->query("INSERT INTO users (username,password,mail,is_admin) VALUES ('".$_POST["username"]."','".$_POST["pass"]."','".$_POST["mail"]."',0)", PDO::FETCH_ASSOC);
+            $query = $db->query("INSERT INTO users (username,password,mail,is_admin,desktop_name,background_color) VALUES ('".$_POST["username"]."','".$_POST["pass"]."','".$_POST["mail"]."',0,'','')", PDO::FETCH_ASSOC);
             header("Location: index.php");
         }
     ?>
-    <body>
         <div class="container">
             <?php
                 include("menu.php");
@@ -40,5 +39,4 @@
                 include("footer.php");
             ?>
         </div>
-    </body>
 </html>

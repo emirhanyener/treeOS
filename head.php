@@ -1,6 +1,5 @@
 <?php
     error_reporting(E_ERROR | E_PARSE); 
-    session_start(); 
     if (isset($_SESSION["last_activity"])) {
         if(time() - $_SESSION["last_activity"] > 3600){
             session_unset();

@@ -1,4 +1,6 @@
-<?php $title = "Desktop"; ?>
+<?php $title = "Desktop"; 
+session_start();
+?>
 <html>
     <?php
         include("head.php");
