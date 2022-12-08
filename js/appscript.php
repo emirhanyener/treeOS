@@ -9,6 +9,7 @@
     var logo_icon = new Image();
     logo_icon.src = 'images/logo.png';
 
+    var loader_active = true;
     var desktop_context_menu_active = false;
     var selected_context_menu_file = -1;
     var selected_file = -1;
@@ -41,6 +42,10 @@
             }
         ?>
     ];
+
+    setInterval(() => {
+        loader_active = false;
+    }, 2000);
 
     function refresh(){
         canvas.width = window.innerWidth;
@@ -161,6 +166,15 @@
         }
 
         ctx.drawImage(logo_icon, 13, canvas.height - 70, 40, 60)
+
+        if(loader_active){
+            ctx.fillStyle = "#020";
+            ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
+            ctx.fillStyle = "#FFF8";
+            ctx.font = "28px Arial";
+            ctx.fillText("Loading", window.innerWidth / 2 - 90, window.innerHeight / 2 + 50);
+            ctx.drawImage(logo_icon, window.innerWidth / 2 - logo_icon.naturalWidth / 2, window.innerHeight / 2 - logo_icon.naturalHeight / 2, logo_icon.naturalWidth / 2, logo_icon.naturalHeight / 2)
+        }
     }
         
     function pointer_stats(e){
@@ -342,4 +356,7 @@
         refresh();
     });
     refresh();
+    setInterval(() => {
+        refresh();
+    }, 500);
 </script>
