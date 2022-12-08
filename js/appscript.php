@@ -17,6 +17,8 @@
     var selected_file = -1;
     var opened_folder = "";
 
+    var background_color = '<?php echo $user["background_color"]; ?>';
+
 	document.addEventListener('mousemove', pointer_stats);
 	document.addEventListener('mousedown', switch_drag);
 	document.addEventListener('mouseup', switch_drag);
@@ -54,7 +56,7 @@
         canvas.height = window.innerHeight;
 
         if(opened_folder == ""){
-            ctx.fillStyle = "#020";
+            ctx.fillStyle = background_color;
             ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
             ctx.fillStyle = "#FFF8";
             ctx.font = "28px Arial";
@@ -201,7 +203,7 @@
             file_dropping = false;
         }
         if(loader_active){
-            ctx.fillStyle = "#020";
+            ctx.fillStyle = background_color;
             ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
             ctx.fillStyle = "#FFF8";
             ctx.font = "28px Arial";
@@ -233,7 +235,7 @@
                 document.getElementById("body").innerHTML = "<div class='center-div'><h3>Change Desktop Name</h3><hr><form action='change_desktop_name.php' method='POST'><table><tr><td>New Desktop Name</td><td><input type='text' name = 'desktopname'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Change'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='button' onclick='close_center_div()' value='Close'></td></tr></table></form></div>";
             }
             if(pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 270 && pointer.pointer_position_y >= canvas.height - 60 && pointer.pointer_position_y <= canvas.height - 30){
-                console.log("change background color");
+                document.getElementById("body").innerHTML = "<div class='center-div'><h3>Change Background Color</h3><hr><form action='change_background_color.php' method='POST'><table><tr><td>New Background Color</td><td><input type='color' name = 'color'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Change'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='button' onclick='close_center_div()' value='Close'></td></tr></table></form></div>";
             }
         }
         if(pointer.pointer_position_x >= 0 && pointer.pointer_position_x <= 70 && pointer.pointer_position_y >= canvas.height - 80 && pointer.pointer_position_y <= canvas.height){
