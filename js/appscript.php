@@ -10,6 +10,7 @@
     logo_icon.src = 'images/logo.png';
 
     var loader_active = true;
+    var file_dropping = false;
     var desktop_context_menu_active = false;
     var selected_context_menu_file = -1;
     var selected_file = -1;
@@ -167,6 +168,14 @@
 
         ctx.drawImage(logo_icon, 13, canvas.height - 70, 40, 60)
 
+        if(file_dropping){
+            ctx.fillStyle = "#4449";
+            ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
+            ctx.fillStyle = "#FFF8";
+            ctx.font = "28px Arial";
+            ctx.fillText("Drop File", window.innerWidth / 2 - 30, window.innerHeight / 2 - 14);
+            file_dropping = false;
+        }
         if(loader_active){
             ctx.fillStyle = "#020";
             ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
@@ -302,6 +311,7 @@
     }
     function allow_drop(e){
         e.preventDefault();
+        file_dropping = true;
     }
 
     function save_desktop_fn(){
