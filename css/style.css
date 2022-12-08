@@ -129,18 +129,18 @@ pageheader{
     border: 2px solid gray;
     border-radius: 20px;
 }
-table {
+.files-table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-td, th {
+.files-table td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
 
-tr:nth-child(even) {
+.files-table tr:nth-child(even) {
     background-color: #dddddd;
 }

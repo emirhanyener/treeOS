@@ -11,7 +11,7 @@
             ?>
                 <div id="body">
                     <h2><?php echo $user["username"]; ?>'s files</h2>
-                    <table>
+                    <table class="files-table">
                     <tr>
                         <th>File Name</th>
                         <th>Download</th>
