@@ -12,6 +12,7 @@
     var loader_active = true;
     var file_dropping = false;
     var desktop_context_menu_active = false;
+    var settings_menu_active = false;
     var selected_context_menu_file = -1;
     var selected_file = -1;
     var opened_folder = "";
@@ -125,6 +126,7 @@
             ctx.rect(pointer.click_position_x, pointer.click_position_y, 110, 30);
         }
 
+
         if(selected_context_menu_file != -1){
             ctx.font = "16px Arial";
 
@@ -156,6 +158,18 @@
             ctx.rect(pointer.click_position_x, pointer.click_position_y + 60, 100, 30);
 
             ctx.stroke();
+        }
+        
+        if(settings_menu_active){
+            ctx.font = "16px Arial";
+            if(pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 250 && pointer.pointer_position_y >= canvas.height - 30 && pointer.pointer_position_y <= canvas.height)
+                ctx.fillStyle = "#DFFFDF";
+            else
+                ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(70, canvas.height - 30, 180, 30);
+            ctx.fillStyle = "#333333";
+            ctx.fillText("Change Desktop Name", 75, canvas.height - 10);
+            ctx.rect(80, canvas.height - 30, 150, 30);
         }
 
         if(pointer.pointer_position_x >= 0 && pointer.pointer_position_x <= 70 && pointer.pointer_position_y >= canvas.height - 80 && pointer.pointer_position_y <= canvas.height){
@@ -203,6 +217,16 @@
         document.getElementById("body").innerHTML = "";
     }
     function switch_drag(){
+        if(settings_menu_active){
+            if(pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 250 && pointer.pointer_position_y >= canvas.height - 30 && pointer.pointer_position_y <= canvas.height){
+                console.log("change desktop name");
+            }
+        }
+        if(pointer.pointer_position_x >= 0 && pointer.pointer_position_x <= 70 && pointer.pointer_position_y >= canvas.height - 80 && pointer.pointer_position_y <= canvas.height){
+            settings_menu_active = true;
+        } else {
+            settings_menu_active = false;
+        }
         if(opened_folder != ""){
             if(pointer.pointer_position_x >= window.innerWidth - 100 && pointer.pointer_position_x <= window.innerWidth && pointer.pointer_position_y >= 0 && pointer.pointer_position_y <= 40){
                 opened_folder = "";
