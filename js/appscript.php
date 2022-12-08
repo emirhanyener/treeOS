@@ -71,18 +71,6 @@
             ctx.drawImage(folder_icon, 10, 10, 13, 20)
         }
 
-        if(desktop_context_menu_active){
-            ctx.font = "16px Arial";
-            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 110 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30)
-                ctx.fillStyle = "#DFFFDF";
-            else
-                ctx.fillStyle = "#FFFFFF";
-            ctx.fillRect(pointer.click_position_x, pointer.click_position_y, 110, 30);
-            ctx.fillStyle = "#333333";
-            ctx.fillText("Create Folder", pointer.click_position_x + 5, pointer.click_position_y + 20);
-            ctx.rect(pointer.click_position_x, pointer.click_position_y, 110, 30);
-        }
-
         files.forEach(item => {
             if(item.foldername == opened_folder){
                 if(pointer.pointer_position_x >= item.position_x - 20 && pointer.pointer_position_x <= item.position_x + 90 && pointer.pointer_position_y >= item.position_y - 5 && pointer.pointer_position_y <= item.position_y + 140){   
@@ -117,6 +105,19 @@
                 }
             }
         });
+        
+        if(desktop_context_menu_active){
+            ctx.font = "16px Arial";
+            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 110 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30)
+                ctx.fillStyle = "#DFFFDF";
+            else
+                ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(pointer.click_position_x, pointer.click_position_y, 110, 30);
+            ctx.fillStyle = "#333333";
+            ctx.fillText("Create Folder", pointer.click_position_x + 5, pointer.click_position_y + 20);
+            ctx.rect(pointer.click_position_x, pointer.click_position_y, 110, 30);
+        }
+
         if(selected_context_menu_file != -1){
             ctx.font = "16px Arial";
 
