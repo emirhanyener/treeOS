@@ -2,10 +2,12 @@
     var canvas = document.getElementById("application");
     var ctx = canvas.getContext("2d");
 
-    var img = new Image();
-    img.src = 'images/file_icon.png';
+    var file_icon = new Image();
+    file_icon.src = 'images/file_icon.png';
     var folder_icon = new Image();
     folder_icon.src = 'images/folder_icon.png';
+    var logo_icon = new Image();
+    logo_icon.src = 'images/logo.png';
 
     var desktop_context_menu_active = false;
     var selected_context_menu_file = -1;
@@ -40,15 +42,14 @@
         ?>
     ];
 
-    refresh();
     function refresh(){
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
         if(opened_folder == ""){
-            ctx.fillStyle = "#000000";
+            ctx.fillStyle = "#020";
             ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
-            ctx.fillStyle = "#ADF8";
+            ctx.fillStyle = "#FFF8";
             ctx.font = "28px Arial";
             ctx.fillText("<?php echo $_SESSION['username']; ?>'s desktop", 20, 40);
         } else {
@@ -84,7 +85,7 @@
                         ctx.drawImage(fileimage, item.position_x, item.position_y, 70, 100); 
                     }
                     else{
-                        ctx.drawImage(img, item.position_x, item.position_y, 70, 100);
+                        ctx.drawImage(file_icon, item.position_x, item.position_y, 70, 100);
                     }
                     
                     ctx.fillStyle = "#ADF8";
@@ -150,6 +151,16 @@
 
             ctx.stroke();
         }
+
+        if(pointer.pointer_position_x >= 0 && pointer.pointer_position_x <= 70 && pointer.pointer_position_y >= canvas.height - 80 && pointer.pointer_position_y <= canvas.height){
+            ctx.fillStyle = "#8888";
+            ctx.fillRect(0, canvas.height - 80, 70,80);
+        } else {
+            ctx.fillStyle = "#5558";
+            ctx.fillRect(0, canvas.height - 80, 70,80);
+        }
+
+        ctx.drawImage(logo_icon, 13, canvas.height - 70, 40, 60)
     }
         
     function pointer_stats(e){
@@ -330,4 +341,5 @@
         
         refresh();
     });
+    refresh();
 </script>
