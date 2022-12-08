@@ -267,13 +267,14 @@
                 document.getElementById("body").innerHTML = "<div class='center-div'><h3>Rename File</h3><hr><form action='rename_file.php' method='POST'><table><tr><td><input name='filename' type='hidden' value = '" + files[selected_context_menu_file].filename + "'></td></tr><tr><td>From</td><td>" + files[selected_context_menu_file].filename.split("_")[2] + "</td></tr><tr><td>To</td><td><input type='text' name = 'tofilename' value = '" + files[selected_context_menu_file].filename.split("_")[2] + "'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Rename'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='button' onclick='close_center_div()' value='Close'></td></tr></table></form></div>";
             }
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y + 60 && pointer.pointer_position_y <= pointer.click_position_y + 90){
-                var form_data = new FormData();                  
+                var form_data = new FormData();
+                temp = selected_context_menu_file;
                 form_data.append('filename', files[selected_context_menu_file].filename);
 
                 var xhttp = new XMLHttpRequest();
                 xhttp.open("POST", "delete_file.php", true);
                 xhttp.onload = function(event) {
-                    window.location.href = "desktop.php";
+                    files.splice(temp, 1);
                 }
 
                 xhttp.send(form_data);
@@ -344,7 +345,11 @@
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "file_upload.php", true);
         xhttp.onload = function(event) {
-            window.location.href = "desktop.php";
+            files.push({filename: this.responseText,
+                        position_x: e.clientX,
+                        position_y: e.clientY,
+                        foldername: "",
+                        isfolder: 0});
         }
  
         xhttp.send(form_data);
