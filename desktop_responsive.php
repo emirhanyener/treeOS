@@ -31,6 +31,14 @@ session_start();
                     ?>
                     
                     </table>
+
+                    <h2>Upload File</h2>
+                    <form action="POST" action="file_upload.php">
+                        <input type="hidden" name="position_x" value ="100">
+                        <input type="hidden" name="position_y" value ="100">
+                        <input type="file" name="file"><br>
+                        <input type="submit" name="position_y" value ="Upload">
+                    </form>
                 <?php
                     } else {
                 ?>
