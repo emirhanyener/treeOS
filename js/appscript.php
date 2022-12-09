@@ -12,6 +12,11 @@
     let logo_icon = new Image();
     logo_icon.src = 'images/logo.png';
 
+    let pointer_idle = false;
+    let pointer_idle_time = 0;
+    let last_pointer_position_x = 0;
+    let last_pointer_position_y = 0;
+
     let loader_active = true;
     let file_dropping = false;
     let desktop_context_menu_active = false;
@@ -49,6 +54,25 @@
             }
         ?>
     ];
+
+    setInterval(() => {
+        pointerIdleControl();
+    }, 1000);
+    function pointerIdleControl(){
+        if(last_pointer_position_x == pointer.pointer_position_x && last_pointer_position_y == pointer.pointer_position_y){
+            pointer_idle_time++;
+        } else {
+            pointer_idle_time = 0;
+            pointer_idle = false;
+        }
+
+        if(pointer_idle_time > 9){
+            pointer_idle = true;
+        }
+
+        last_pointer_position_x = pointer.pointer_position_x;
+        last_pointer_position_y = pointer.pointer_position_y;
+    }
 
     setInterval(() => {
         loader_active = false;
