@@ -1,10 +1,14 @@
 <script>
+    //window width control
     if(window.innerWidth < 500){
         window.location="desktop_responsive.php";
     }
+
+    //canvas
     let canvas = document.getElementById("application");
     let ctx = canvas.getContext("2d");
 
+    //images
     let file_icon = new Image();
     file_icon.src = 'images/file_icon.png';
     let folder_icon = new Image();
@@ -12,11 +16,13 @@
     let logo_icon = new Image();
     logo_icon.src = 'images/logo.png';
 
+    //idle screen
     let pointer_idle = false;
     let pointer_idle_time = 0;
     let last_pointer_position_x = 0;
     let last_pointer_position_y = 0;
 
+    //system variables
     let loader_active = true;
     let file_dropping = false;
     let desktop_context_menu_active = false;
@@ -27,10 +33,12 @@
 
     let background_color = '<?php echo $user["background_color"]; ?>';
 
+    //mouse events
 	document.addEventListener('mousemove', pointer_stats);
 	document.addEventListener('mousedown', switch_drag);
 	document.addEventListener('mouseup', switch_drag);
 
+    //pointer data
     let pointer = {
         is_dragging: false,
         click_position_x: 0,
@@ -39,6 +47,7 @@
         pointer_position_y: 0
     };
 
+    //all files
     const files = [
         <?php
             foreach($files as $item){
@@ -78,6 +87,7 @@
         loader_active = false;
     }, 2000);
 
+    //canvas draw all
     function refresh(){
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -247,6 +257,7 @@
         ctx.stroke();
     }
         
+    //update pointer data
     function pointer_stats(e){
         pointer.pointer_position_x = e.clientX;
         pointer.pointer_position_y = e.clientY;
@@ -260,9 +271,13 @@
 
         refresh();
     }
+
+    //close panel
     function close_center_div(){
         document.getElementById("body").innerHTML = "";
     }
+
+    //mouse down/up events
     function switch_drag(){
         if(settings_menu_active){
             if(pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 270 && pointer.pointer_position_y >= canvas.height - 30 && pointer.pointer_position_y <= canvas.height){
@@ -368,6 +383,7 @@
         refresh();
     }
     
+    //file drop
     function drop(e){
         e.preventDefault();
         file_obj = e.dataTransfer.files[0];
@@ -394,6 +410,7 @@
         file_dropping = true;
     }
 
+    //update all file data to database
     function save_desktop_fn(){
         files.forEach(item => {
             let form_data = new FormData();
@@ -407,6 +424,7 @@
         });
     }
 
+    //double click file open 
     function open_file(){
         for(let i = 0; i < files.length; i++){
             if(pointer.click_position_x >= files[i].position_x - 20 && pointer.click_position_x <= files[i].position_x + 90){
@@ -424,6 +442,7 @@
         }
     }
 
+    //custom context menu for canvas
     window.addEventListener('contextmenu', (event) => {
         event.preventDefault();
 
