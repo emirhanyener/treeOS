@@ -2,31 +2,31 @@
     if(window.innerWidth < 500){
         window.location="desktop_responsive.php";
     }
-    var canvas = document.getElementById("application");
-    var ctx = canvas.getContext("2d");
+    let canvas = document.getElementById("application");
+    let ctx = canvas.getContext("2d");
 
-    var file_icon = new Image();
+    let file_icon = new Image();
     file_icon.src = 'images/file_icon.png';
-    var folder_icon = new Image();
+    let folder_icon = new Image();
     folder_icon.src = 'images/folder_icon.png';
-    var logo_icon = new Image();
+    let logo_icon = new Image();
     logo_icon.src = 'images/logo.png';
 
-    var loader_active = true;
-    var file_dropping = false;
-    var desktop_context_menu_active = false;
-    var settings_menu_active = false;
-    var selected_context_menu_file = -1;
-    var selected_file = -1;
-    var opened_folder = "";
+    let loader_active = true;
+    let file_dropping = false;
+    let desktop_context_menu_active = false;
+    let settings_menu_active = false;
+    let selected_context_menu_file = -1;
+    let selected_file = -1;
+    let opened_folder = "";
 
-    var background_color = '<?php echo $user["background_color"]; ?>';
+    let background_color = '<?php echo $user["background_color"]; ?>';
 
 	document.addEventListener('mousemove', pointer_stats);
 	document.addEventListener('mousedown', switch_drag);
 	document.addEventListener('mouseup', switch_drag);
 
-    var pointer = {
+    let pointer = {
         is_dragging: false,
         click_position_x: 0,
         click_position_y: 0,
@@ -270,11 +270,11 @@
                 document.getElementById("body").innerHTML = "<div class='center-div'><h3>Rename File</h3><hr><form action='rename_file.php' method='POST'><input type='hidden' name='isfolder' value = '" + files[selected_context_menu_file].isfolder + "'><table><tr><td><input name='filename' type='hidden' value = '" + files[selected_context_menu_file].filename + "'></td></tr><tr><td>From</td><td>" + (files[selected_context_menu_file].isfolder == 0 ? files[selected_context_menu_file].filename.split("_")[2] : files[selected_context_menu_file].filename) + "</td></tr><tr><td>To</td><td><input type='text' name = 'tofilename' value = '" + (files[selected_context_menu_file].isfolder == 0 ? files[selected_context_menu_file].filename.split("_")[2] : files[selected_context_menu_file].filename) + "'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Rename'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='button' onclick='close_center_div()' value='Close'></td></tr></table></form></div>";
             }
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y + 60 && pointer.pointer_position_y <= pointer.click_position_y + 90){
-                var form_data = new FormData();
+                let form_data = new FormData();
                 temp = selected_context_menu_file;
                 form_data.append('filename', files[selected_context_menu_file].filename);
 
-                var xhttp = new XMLHttpRequest();
+                let xhttp = new XMLHttpRequest();
                 xhttp.open("POST", "delete_file.php", true);
                 xhttp.onload = function(event) {
                     files.splice(temp, 1);
@@ -311,12 +311,12 @@
                         if(pointer.click_position_y >= files[i].position_y - 5 && pointer.click_position_y <= files[i].position_y + 140){
                             if(files[i].isfolder == 1 && i != selected_file){
                                 if(opened_folder == files[i].foldername){
-                                    var temp = selected_file;
-                                    var form_data = new FormData();
+                                    let temp = selected_file;
+                                    let form_data = new FormData();
                                     form_data.append('foldername', files[i].filename);
                                     form_data.append('filename', files[selected_file].filename);
 
-                                    var xhttp = new XMLHttpRequest();
+                                    let xhttp = new XMLHttpRequest();
                                     xhttp.open("POST", "add_to_folder.php", true);
                                     xhttp.onload = function(event) {
                                         files[temp].foldername = files[i].filename;
@@ -341,12 +341,12 @@
         e.preventDefault();
         file_obj = e.dataTransfer.files[0];
 
-        var form_data = new FormData();
+        let form_data = new FormData();
         form_data.append('file', file_obj);
         form_data.append('position_x', e.clientX);
         form_data.append('position_y', e.clientY);
 
-        var xhttp = new XMLHttpRequest();
+        let xhttp = new XMLHttpRequest();
         xhttp.open("POST", "file_upload.php", true);
         xhttp.onload = function(event) {
             files.push({filename: this.responseText,
@@ -365,12 +365,12 @@
 
     function save_desktop_fn(){
         files.forEach(item => {
-            var form_data = new FormData();
+            let form_data = new FormData();
             form_data.append('filename', item.filename);
             form_data.append('position_x', item.position_x);
             form_data.append('position_y', item.position_y);
 
-            var xhttp = new XMLHttpRequest();
+            let xhttp = new XMLHttpRequest();
             xhttp.open("POST", "save_desktop.php", true);
             xhttp.send(form_data);
         });
