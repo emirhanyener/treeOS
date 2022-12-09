@@ -5,7 +5,6 @@ session_start();
     <?php
         include("head.php");
     ?>
-    <body>
     <?php
         if(isset($_SESSION["login"])){
             $files = $db->query("select * from files where user_id={$_SESSION['userid']}");
@@ -23,5 +22,4 @@ session_start();
     <?php
         }
     ?>
-    </body>
 </html>

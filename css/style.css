@@ -144,3 +144,19 @@ pageheader{
 .files-table tr:nth-child(even) {
     background-color: #dddddd;
 }
+
+.slider-img{
+    width:100%;
+}
+.slider-img img{
+    width:100%;
+    border-radius: 10px;
+}
+.slider-img font{
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: gray;
+    font-size: 24px;
+}
