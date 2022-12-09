@@ -237,6 +237,13 @@
             ctx.fillText("Loading", window.innerWidth / 2 - 90, window.innerHeight / 2 + 50);
             ctx.drawImage(logo_icon, window.innerWidth / 2 - logo_icon.naturalWidth / 2, window.innerHeight / 2 - logo_icon.naturalHeight / 2, logo_icon.naturalWidth / 2, logo_icon.naturalHeight / 2)
         }
+        if(pointer_idle){
+            ctx.fillStyle = background_color;
+            ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
+            ctx.fillStyle = "#FFF6";
+            ctx.font = "128px Arial";
+            ctx.fillText((new Date()).getHours() + ":" + (new Date()).getMinutes() + ":" + (new Date()).getSeconds(), window.innerWidth / 2 - 250, window.innerHeight / 2);
+        }
         ctx.stroke();
     }
         
@@ -441,7 +448,7 @@
     refresh();
     setInterval(() => {
         refresh();
-    }, 2000);
+    }, 1000);
 
     window.onresize = function(event) {
         if(window.innerWidth < 500){
