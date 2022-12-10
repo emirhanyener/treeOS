@@ -89,9 +89,11 @@
 
     //canvas draw all
     function refresh(){
+        //set canvas size
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
+        //folder
         if(opened_folder == ""){
             ctx.fillStyle = background_color;
             ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
@@ -117,7 +119,9 @@
             ctx.fillText(opened_folder, 35, 27);
             ctx.drawImage(folder_icon, 10, 10, 13, 20)
         }
+        //folder end
 
+        //files
         files.forEach(item => {
             if(item.foldername == opened_folder){
                 if(pointer.pointer_position_x >= item.position_x - 20 && pointer.pointer_position_x <= item.position_x + 90 && pointer.pointer_position_y >= item.position_y - 5 && pointer.pointer_position_y <= item.position_y + 140){   
@@ -152,7 +156,9 @@
                 }
             }
         });
+        //files end
         
+        //desktop context menu(create folder)
         if(desktop_context_menu_active){
             ctx.font = "16px Arial";
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 110 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30)
@@ -164,8 +170,9 @@
             ctx.fillText("Create Folder", pointer.click_position_x + 5, pointer.click_position_y + 20);
             ctx.rect(pointer.click_position_x, pointer.click_position_y, 110, 30);
         }
+        //desktop context menu end
 
-
+        //file context menu
         if(selected_context_menu_file != -1){
             ctx.font = "16px Arial";
 
@@ -198,7 +205,9 @@
 
             ctx.stroke();
         }
+        //file context menu end
         
+        //start menu
         if(settings_menu_active){
             ctx.font = "16px Arial";
             if(pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 270 && pointer.pointer_position_y >= canvas.height - 30 && pointer.pointer_position_y <= canvas.height)
@@ -220,7 +229,9 @@
             ctx.fillText("Change Background Color", 75, canvas.height - 40);
             ctx.rect(70, canvas.height - 60, 200, 30);
         }
+        //start menu end
 
+        //start icon
         if(pointer.pointer_position_x >= 0 && pointer.pointer_position_x <= 70 && pointer.pointer_position_y >= canvas.height - 80 && pointer.pointer_position_y <= canvas.height){
             ctx.fillStyle = "#8888";
             ctx.fillRect(0, canvas.height - 80, 70,80);
@@ -228,9 +239,10 @@
             ctx.fillStyle = "#5558";
             ctx.fillRect(0, canvas.height - 80, 70,80);
         }
-
         ctx.drawImage(logo_icon, 13, canvas.height - 70, 40, 60)
+        //start icon end
 
+        //file drop
         if(file_dropping){
             ctx.fillStyle = "#4449";
             ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
@@ -239,6 +251,9 @@
             ctx.fillText("Drop File", window.innerWidth / 2 - 30, window.innerHeight / 2 - 14);
             file_dropping = false;
         }
+        //file drop end
+
+        //loader
         if(loader_active){
             ctx.fillStyle = background_color;
             ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
@@ -247,6 +262,9 @@
             ctx.fillText("Loading", window.innerWidth / 2 - 90, window.innerHeight / 2 + 50);
             ctx.drawImage(logo_icon, window.innerWidth / 2 - logo_icon.naturalWidth / 2, window.innerHeight / 2 - logo_icon.naturalHeight / 2, logo_icon.naturalWidth / 2, logo_icon.naturalHeight / 2)
         }
+        //loader end
+
+        //idle screen
         if(pointer_idle){
             ctx.fillStyle = background_color;
             ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
@@ -254,6 +272,8 @@
             ctx.font = "128px Arial";
             ctx.fillText((new Date()).getHours() + ":" + (new Date()).getMinutes() + ":" + ((new Date()).getSeconds() < 10 ? "0" + (new Date()).getSeconds() : (new Date()).getSeconds()), window.innerWidth / 2 - 250, window.innerHeight / 2);
         }
+        //idle screen end
+
         ctx.stroke();
     }
         
@@ -262,6 +282,7 @@
         pointer.pointer_position_x = e.clientX;
         pointer.pointer_position_y = e.clientY;
 
+        //if a file selected then set file position
         if(pointer.is_dragging){
             if(selected_file != -1){
                 files[selected_file].position_x = pointer.pointer_position_x - (75 / 2);
@@ -279,6 +300,7 @@
 
     //mouse down/up events
     function switch_drag(){
+        //start menu events
         if(settings_menu_active){
             if(pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 270 && pointer.pointer_position_y >= canvas.height - 30 && pointer.pointer_position_y <= canvas.height){
                 document.getElementById("body").innerHTML = "<div class='center-div'><h3>Change Desktop Name</h3><hr><form action='change_desktop_name.php' method='POST'><table><tr><td>New Desktop Name</td><td><input type='text' name = 'desktopname'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Change'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='button' onclick='close_center_div()' value='Close'></td></tr></table></form></div>";
@@ -287,11 +309,17 @@
                 document.getElementById("body").innerHTML = "<div class='center-div'><h3>Change Background Color</h3><hr><form action='change_background_color.php' method='POST'><table><tr><td>New Background Color</td><td><input type='color' name = 'color'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Change'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='button' onclick='close_center_div()' value='Close'></td></tr></table></form></div>";
             }
         }
+        //start menu events end
+
+        //start menu activity
         if(pointer.pointer_position_x >= 0 && pointer.pointer_position_x <= 70 && pointer.pointer_position_y >= canvas.height - 80 && pointer.pointer_position_y <= canvas.height){
             settings_menu_active = true;
         } else {
             settings_menu_active = false;
         }
+        //start menu activity end
+
+        //desktop context menu
         if(opened_folder != ""){
             if(pointer.pointer_position_x >= window.innerWidth - 100 && pointer.pointer_position_x <= window.innerWidth && pointer.pointer_position_y >= 0 && pointer.pointer_position_y <= 40){
                 opened_folder = "";
@@ -304,6 +332,9 @@
                 desktop_context_menu_active = false;
             }
         }
+        //desktop context menu end
+
+        //file context menu
         if(selected_context_menu_file != -1){
             if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30){
                 if(files[selected_context_menu_file].isfolder == 0){
@@ -332,11 +363,15 @@
             selected_context_menu_file = -1;
             refresh();
         }
+        //file context menu end
+
+        //set pointer data
         pointer.is_dragging = !pointer.is_dragging;
 
         pointer.click_position_x = pointer.pointer_position_x;
         pointer.click_position_y = pointer.pointer_position_y;
 
+        //select file
         for(let i = 0; i < files.length; i++){
             if(pointer.click_position_x >= files[i].position_x - 20 && pointer.click_position_x <= files[i].position_x + 90){
                 if(pointer.click_position_y >= files[i].position_y - 5 && pointer.click_position_y <= files[i].position_y + 140){
@@ -349,7 +384,9 @@
                 }
             }
         }
+        //select file end
         
+        //add to folder and save desktop events
         if(!pointer.is_dragging){
             if(selected_file != -1){
                 for(let i = 0; i < files.length; i++){
@@ -379,6 +416,7 @@
             }
             selected_file = -1;
         }
+        //add to folder and save desktop events end
         
         refresh();
     }
@@ -445,7 +483,7 @@
     //custom context menu for canvas
     window.addEventListener('contextmenu', (event) => {
         event.preventDefault();
-
+        //set file context menu activity
         for(let i = 0; i < files.length; i++){
             if(opened_folder == files[i].foldername){
                 if(pointer.click_position_x >= files[i].position_x - 20 && pointer.click_position_x <= files[i].position_x + 90){
@@ -456,19 +494,26 @@
                 }
             }
         }
+        //set file context menu activity end
+
+        //set desktop context menu activity
         if(selected_context_menu_file == -1){
             if(opened_folder == ""){
                 desktop_context_menu_active = true;
             }
         }
+        //set desktop context menu activity end
         
         refresh();
     });
+
+    //refresh every one second
     refresh();
     setInterval(() => {
         refresh();
     }, 1000);
 
+    //window resize event
     window.onresize = function(event) {
         if(window.innerWidth < 500){
             window.location="desktop_responsive.php";
