@@ -35,6 +35,7 @@ session_start();
         
 <script>
     var slider_index = 0;
+    slider();
     function slider() {
         var images = document.getElementsByClassName("slider-img");
         for (var i = 0; i < images.length; i++) {
