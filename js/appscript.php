@@ -271,6 +271,9 @@
             ctx.fillStyle = "#FFF6";
             ctx.font = "128px Arial";
             ctx.fillText((new Date()).getHours() + ":" + (new Date()).getMinutes() + ":" + ((new Date()).getSeconds() < 10 ? "0" + (new Date()).getSeconds() : (new Date()).getSeconds()), window.innerWidth / 2 - 250, window.innerHeight / 2);
+            ctx.fillStyle = "#FFF6";
+            ctx.font = "32px Arial";
+            ctx.fillText("<?php echo $_SESSION["username"]; ?>", 10, 35);
         }
         //idle screen end
 
