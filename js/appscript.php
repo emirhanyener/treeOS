@@ -47,6 +47,10 @@
         pointer_position_y: 0
     };
 
+    let config = {
+        file_context_menu_width: 140
+    };
+
     //all files
     const files = [
         <?php
@@ -176,32 +180,43 @@
         if(selected_context_menu_file != -1){
             ctx.font = "16px Arial";
 
-            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30)
+            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + config.file_context_menu_width && pointer.pointer_position_y >= pointer.click_position_y && pointer.pointer_position_y <= pointer.click_position_y + 30)
                 ctx.fillStyle = "#DFFFDF";
             else
                 ctx.fillStyle = "#FFFFFF";
-            ctx.fillRect(pointer.click_position_x, pointer.click_position_y, 100, 30);
+            ctx.fillRect(pointer.click_position_x, pointer.click_position_y, config.file_context_menu_width, 30);
             ctx.fillStyle = "#333333";
             ctx.fillText("Download", pointer.click_position_x + 5, pointer.click_position_y + 20);
-            ctx.rect(pointer.click_position_x, pointer.click_position_y, 100, 30);
+            ctx.rect(pointer.click_position_x, pointer.click_position_y, config.file_context_menu_width, 30);
 
-            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y + 30 && pointer.pointer_position_y <= pointer.click_position_y + 60)  
+            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + config.file_context_menu_width && pointer.pointer_position_y >= pointer.click_position_y + 30 && pointer.pointer_position_y <= pointer.click_position_y + 60)  
                 ctx.fillStyle = "#DFFFDF";
             else
                 ctx.fillStyle = "#FFFFFF";
-            ctx.fillRect(pointer.click_position_x, pointer.click_position_y + 30, 100, 30);
+            ctx.fillRect(pointer.click_position_x, pointer.click_position_y + 30, config.file_context_menu_width, 30);
             ctx.fillStyle = "#333333";
             ctx.fillText("Rename", pointer.click_position_x + 5, pointer.click_position_y + 50);
-            ctx.rect(pointer.click_position_x, pointer.click_position_y + 30, 100, 30);
+            ctx.rect(pointer.click_position_x, pointer.click_position_y + 30, config.file_context_menu_width, 30);
 
-            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y + 60 && pointer.pointer_position_y <= pointer.click_position_y + 90)  
+            if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + config.file_context_menu_width && pointer.pointer_position_y >= pointer.click_position_y + 60 && pointer.pointer_position_y <= pointer.click_position_y + 90)  
                 ctx.fillStyle = "#FFDFDF";
             else
                 ctx.fillStyle = "#FFFFFF";
-            ctx.fillRect(pointer.click_position_x, pointer.click_position_y + 60, 100, 30);
+            ctx.fillRect(pointer.click_position_x, pointer.click_position_y + 60, config.file_context_menu_width, 30);
             ctx.fillStyle = "#333333";
             ctx.fillText("Delete", pointer.click_position_x + 5, pointer.click_position_y + 80);
-            ctx.rect(pointer.click_position_x, pointer.click_position_y + 60, 100, 30);
+            ctx.rect(pointer.click_position_x, pointer.click_position_y + 60, config.file_context_menu_width, 30);
+
+            if(files[selected_context_menu_file].foldername != ""){
+                if(pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + config.file_context_menu_width && pointer.pointer_position_y >= pointer.click_position_y + 90 && pointer.pointer_position_y <= pointer.click_position_y + 120)  
+                    ctx.fillStyle = "#FFDFDF";
+                else
+                    ctx.fillStyle = "#FFFFFF";
+                ctx.fillRect(pointer.click_position_x, pointer.click_position_y + 90, config.file_context_menu_width, 30);
+                ctx.fillStyle = "#333333";
+                ctx.fillText("Move To Desktop", pointer.click_position_x + 5, pointer.click_position_y + 110);
+                ctx.rect(pointer.click_position_x, pointer.click_position_y + 90, config.file_context_menu_width, 30);
+            }
 
             ctx.stroke();
         }
