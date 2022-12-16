@@ -16,6 +16,7 @@ session_start();
                     <tr>
                         <th>File Name</th>
                         <th>Download</th>
+                        <th>Delete</th>
                     </tr>
                     <?php
                         foreach($files as $item){
@@ -24,7 +25,8 @@ session_start();
                     ?>
                     <tr>
                         <td><?php echo explode("_", $item['file_name'])[2]; ?></td>
-                        <td><a href="<?php echo 'uploads/'.$item['file_name']; ?>" download>Download File</a></td>
+                        <td><a href="<?php echo 'uploads/'.$item['file_name']; ?>" download>Download</a></td>
+                        <td><a href="form_delete_file.php?filename=<?php echo $item['file_name']; ?>">Delete</a></td>
                     </tr>
                     <?php
                         }
@@ -33,12 +35,12 @@ session_start();
                     </table>
 
                     <h2>Upload File</h2>
-                    <form action="POST" action="file_upload.php">
-                        <input type="hidden" name="position_x" value ="100">
-                        <input type="hidden" name="position_y" value ="100">
-                        <input type="file" name="file"><br>
-                        <input type="submit" name="position_y" value ="Upload">
-                    </form>
+                    <table>
+                        <form method="POST" action="form_file_upload.php" enctype="multipart/form-data">
+                            <tr><td>File: </td><td><input type="file" name="file" id="file"></td></tr>
+                            <tr><td colspan = "2"><input style="width:100%;padding:10px;color:green;background-color:white;border: 2px solid green;" type="submit" name="position_y" value ="Upload"></td><td>
+                        </form>
+                    </table>
                 <?php
                     } else {
                 ?>
