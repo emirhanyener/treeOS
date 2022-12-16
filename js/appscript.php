@@ -59,10 +59,10 @@
         ?>
             {
                 filename: "<?php echo $item['file_name']; ?>",
-                position_x: <?php echo $item[" position_x "]?>,
-                position_y: <?php echo $item[" position_y "]?>,
+                position_x: <?php echo $item["position_x"]?>,
+                position_y: <?php echo $item["position_y"]?>,
                 foldername: "<?php echo $item['foldername'] ?>",
-                isfolder: <?php echo $item[" is_folder "]?>
+                isfolder: <?php echo $item["is_folder"]?>
         },
         <?php
         }
@@ -374,6 +374,19 @@
                 xhttp.open("POST", "delete_file.php", true);
                 xhttp.onload = function (event) {
                     files.splice(temp, 1);
+                }
+
+                xhttp.send(form_data);
+            }
+            if (pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y + 90 && pointer.pointer_position_y <= pointer.click_position_y + 120) {
+                let temp = selected_context_menu_file;
+                let form_data = new FormData();
+                form_data.append('filename', files[selected_context_menu_file].filename);
+
+                let xhttp = new XMLHttpRequest();
+                xhttp.open("POST", "move_to_desktop.php", true);
+                xhttp.onload = function (event) {
+                    files[temp].foldername = "";
                 }
 
                 xhttp.send(form_data);
