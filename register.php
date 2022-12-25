@@ -7,8 +7,13 @@
     ?>
     <?php 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $query = $db->query("INSERT INTO users (username,password,mail,is_admin,desktop_name,background_color) VALUES ('".$_POST["username"]."','".$_POST["pass"]."','".$_POST["mail"]."',0,'','')", PDO::FETCH_ASSOC);
-            header("Location: index.php");
+            if ($db->query("select * from users where username = '" . $_POST["username"] . "' or mail = '" . $_POST["mail"] . "'", PDO::FETCH_ASSOC)->rowCount() == 0) {
+                $query = $db->query("INSERT INTO users (username,password,mail,mail_active,is_admin,desktop_name,background_color,background_image,mail_verification) VALUES ('" . $_POST["username"] . "','" . $_POST["pass"] . "','" . $_POST["mail"] . "',0,0,'','','','".hash("md5",$_POST["username"])."')", PDO::FETCH_ASSOC);
+                mail($_POST["mail"], "treeOS mail verification", "Click this link for mail verification:http://www.emirhanyener.space/treeOS/mail_verification.php?hash=".hash("md5",$_POST["username"]));
+                header("Location: index.php");
+            } else {
+                header("Location: register.php");
+            }
         }
     ?>
         <div class="container">
