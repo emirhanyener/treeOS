@@ -5,7 +5,7 @@ session_start();
     <?php 
         include("head.php");
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $query = $db->query("SELECT * FROM users where username='".$_POST["username"]."' and password = '".$_POST["pass"]."'")->fetch(PDO::FETCH_ASSOC);
+            $query = $db->query("SELECT * FROM users where username='".str_replace("\"","",str_replace("'","",$_POST["username"]))."' and password = '".str_replace("\"","",str_replace("'","",$_POST["pass"]))."'")->fetch(PDO::FETCH_ASSOC);
             if ($query["mail_active"] == 1){
                 $_SESSION["login"] = 1;
                 $_SESSION["userid"] = $query["id"];
