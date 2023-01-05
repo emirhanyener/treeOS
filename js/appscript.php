@@ -48,7 +48,7 @@
     };
 
     let config = {
-        file_context_menu_width: 140,
+        file_context_menu_width: 200,
         file_context_menu_height: 30
     };
 
@@ -216,6 +216,25 @@
                 ctx.fillRect(pointer.click_position_x, pointer.click_position_y + (config.file_context_menu_height * 3), config.file_context_menu_width, config.file_context_menu_height);
                 ctx.fillStyle = "#333333";
                 ctx.fillText("Move To Desktop", pointer.click_position_x + 5, pointer.click_position_y + 20 + (config.file_context_menu_height * 3));
+                ctx.rect(pointer.click_position_x, pointer.click_position_y + (config.file_context_menu_height * 3), config.file_context_menu_width, config.file_context_menu_height);
+
+
+                if (pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + config.file_context_menu_width && pointer.pointer_position_y >= pointer.click_position_y + (config.file_context_menu_height * 4) && pointer.pointer_position_y <= pointer.click_position_y + (config.file_context_menu_height * 5))
+                    ctx.fillStyle = "#DFDFFF";
+                else
+                    ctx.fillStyle = "#FFFFFF";
+                ctx.fillRect(pointer.click_position_x, pointer.click_position_y + (config.file_context_menu_height * 4), config.file_context_menu_width, config.file_context_menu_height);
+                ctx.fillStyle = "#333333";
+                ctx.fillText("Set As Desktop Background", pointer.click_position_x + 5, pointer.click_position_y + 20 + (config.file_context_menu_height * 4));
+                ctx.rect(pointer.click_position_x, pointer.click_position_y + (config.file_context_menu_height * 4), config.file_context_menu_width, config.file_context_menu_height);
+            } else {
+                if (pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + config.file_context_menu_width && pointer.pointer_position_y >= pointer.click_position_y + (config.file_context_menu_height * 3) && pointer.pointer_position_y <= pointer.click_position_y + (config.file_context_menu_height * 4))
+                    ctx.fillStyle = "#DFDFFF";
+                else
+                    ctx.fillStyle = "#FFFFFF";
+                ctx.fillRect(pointer.click_position_x, pointer.click_position_y + (config.file_context_menu_height * 3), config.file_context_menu_width, config.file_context_menu_height);
+                ctx.fillStyle = "#333333";
+                ctx.fillText("Set As Desktop Background", pointer.click_position_x + 5, pointer.click_position_y + 20 + (config.file_context_menu_height * 3));
                 ctx.rect(pointer.click_position_x, pointer.click_position_y + (config.file_context_menu_height * 3), config.file_context_menu_width, config.file_context_menu_height);
             }
 
