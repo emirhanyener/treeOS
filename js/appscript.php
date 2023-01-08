@@ -226,7 +226,7 @@
                 ctx.rect(pointer.click_position_x, pointer.click_position_y + (config.file_context_menu_height * 3), config.file_context_menu_width, config.file_context_menu_height);
 
 
-                if (files[selected_context_menu_file].filename.split(".")[1] == "png" || item.filename.split(".")[1] == "jpg") {
+                if (files[selected_context_menu_file].filename.split(".")[1] == "png" || files[selected_context_menu_file].filename.split(".")[1] == "jpg") {
                     if (pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + config.file_context_menu_width && pointer.pointer_position_y >= pointer.click_position_y + (config.file_context_menu_height * 4) && pointer.pointer_position_y <= pointer.click_position_y + (config.file_context_menu_height * 5))
                         ctx.fillStyle = "#DFDFFF";
                     else
@@ -237,7 +237,7 @@
                     ctx.rect(pointer.click_position_x, pointer.click_position_y + (config.file_context_menu_height * 4), config.file_context_menu_width, config.file_context_menu_height);
                 }
             } else {
-                if (files[selected_context_menu_file].filename.split(".")[1] == "png" || item.filename.split(".")[1] == "jpg") {
+                if (files[selected_context_menu_file].filename.split(".")[1] == "png" || files[selected_context_menu_file].filename.split(".")[1] == "jpg") {
                     if (pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + config.file_context_menu_width && pointer.pointer_position_y >= pointer.click_position_y + (config.file_context_menu_height * 3) && pointer.pointer_position_y <= pointer.click_position_y + (config.file_context_menu_height * 4))
                         ctx.fillStyle = "#DFDFFF";
                     else
@@ -425,7 +425,7 @@
                 }
                 
                 if (pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y + 120 && pointer.pointer_position_y <= pointer.click_position_y + 150) {
-                    if (files[selected_context_menu_file].filename.split(".")[1] == "png" || item.filename.split(".")[1] == "jpg") {
+                    if (files[selected_context_menu_file].filename.split(".")[1] == "png" || files[selected_context_menu_file].filename.split(".")[1] == "jpg") {
                         let temp = selected_context_menu_file;
                         let form_data = new FormData();
                         form_data.append('filename', files[selected_context_menu_file].filename);
@@ -442,7 +442,7 @@
             }
             else {
                 if (pointer.pointer_position_x >= pointer.click_position_x && pointer.pointer_position_x <= pointer.click_position_x + 100 && pointer.pointer_position_y >= pointer.click_position_y + 90 && pointer.pointer_position_y <= pointer.click_position_y + 120) {
-                    if (files[selected_context_menu_file].filename.split(".")[1] == "png" || item.filename.split(".")[1] == "jpg") {
+                    if (files[selected_context_menu_file].filename.split(".")[1] == "png" || files[selected_context_menu_file].filename.split(".")[1] == "jpg") {
                         let temp = selected_context_menu_file;
                         let form_data = new FormData();
                         form_data.append('filename', files[selected_context_menu_file].filename);
