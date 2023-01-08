@@ -101,8 +101,14 @@
 
         //folder
         if (opened_folder == "") {
-            ctx.fillStyle = background_color;
-            ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+            if(background_image != ""){
+                let fileimage = new Image();
+                fileimage.src = "uploads/" + background_image;
+                ctx.drawImage(fileimage, 0, 0, window.innerWidth, window.innerHeight);
+            } else {
+                ctx.fillStyle = background_color;
+                ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+            }
             ctx.fillStyle = "#FFF8";
             ctx.font = "28px Arial";
             ctx.fillText("<?php echo ($user["desktop_name"] == "" ? $user["username"] . "'s desktop" : $user["desktop_name"]); ?>", 20, 40);
