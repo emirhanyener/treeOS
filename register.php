@@ -10,9 +10,9 @@
             if ($db->query("select * from users where username = '" . str_replace("\"","",str_replace("'","",$_POST["username"])) . "' or mail = '" . str_replace("\"","",str_replace("'","",$_POST["mail"])) . "'", PDO::FETCH_ASSOC)->rowCount() == 0) {
                 $query = $db->query("INSERT INTO users (username,password,mail,mail_active,is_admin,desktop_name,background_color,background_image,mail_verification) VALUES ('" . str_replace("\"","",str_replace("'","",$_POST["username"])) . "','" . str_replace("\"","",str_replace("'","",$_POST["pass"])) . "','" . str_replace("\"","",str_replace("'","",$_POST["mail"])) . "',0,0,'','','','".hash("md5",$_POST["username"])."')", PDO::FETCH_ASSOC);
                 mail($_POST["mail"], "treeOS mail verification", "Click this link for mail verification:http://www.emirhanyener.space/treeOS/mail_verification.php?hash=".hash("md5",$_POST["username"]));
-                header("Location: index.php");
+                header("Location: login.php?d=verification&mail=".$_POST["mail"]);
             } else {
-                header("Location: register.php");
+                header("Location: register.php?d=error");
             }
         }
     ?>
@@ -21,6 +21,11 @@
                 include("menu.php");
             ?>
             <pageheader>Register</pageheader>
+            <?php
+                if($_GET["d"] == "error"){
+                    echo "<br><font style='color:white;border-radius:10px;padding:15px;background-color:#FF0000DD;'>username or e-mail already exists</font><br>";
+                }
+            ?>
             <form action="register.php" class="center-form" method="POST">
                 <table class="form-table">
                     <tr>

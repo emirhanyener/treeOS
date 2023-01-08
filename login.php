@@ -32,6 +32,11 @@ session_start();
                 } else {
             ?>
                 <pageheader>Login</pageheader>
+                <?php
+                    if($_GET["d"] == "verification"){
+                        echo "<br><font style='color:white;border-radius:10px;padding:15px;background-color:#00BB00DD;'>user verification mail has been sended to <b>".$_GET["mail"]."</b></font><br>";
+                    }
+                ?>
                 <form action="login.php" class="center-form" method="POST">
                     <table class="form-table">
                         <tr><td><label for="username" class="form-label">Username: </label></td>
