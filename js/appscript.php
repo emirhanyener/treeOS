@@ -30,6 +30,7 @@
     let selected_context_menu_file = -1;
     let selected_file = -1;
     let opened_folder = "";
+    var opened_folder_font = [];
 
     let background_color = '<?php echo ($user["background_color"] == "" ? "#222" : $user["background_color"]); ?>';
     let background_image = '<?php echo $user["background_image"]; ?>';
@@ -113,10 +114,13 @@
             ctx.font = "28px Arial";
             ctx.fillText("<?php echo ($user["desktop_name"] == "" ? $user["username"] . "'s desktop" : $user["desktop_name"]); ?>", 20, 40);
         } else {
+            //window
             ctx.fillStyle = "#333";
             ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+            //top bar
             ctx.fillStyle = "#222";
             ctx.fillRect(0, 0, window.innerWidth, 40);
+            //close button
             if (pointer.pointer_position_x >= window.innerWidth - 100 && pointer.pointer_position_x <= window.innerWidth && pointer.pointer_position_y >= 0 && pointer.pointer_position_y <= 40) {
                 ctx.fillStyle = "#F44";
             } else {
@@ -126,9 +130,20 @@
             ctx.fillStyle = "#FFF";
             ctx.font = "20px Arial";
             ctx.fillText("Close", window.innerWidth - 75, 27);
+            //back button
+            if (pointer.pointer_position_x >= window.innerWidth - 200 && pointer.pointer_position_x <= window.innerWidth - 100 && pointer.pointer_position_y >= 0 && pointer.pointer_position_y <= 40) {
+                ctx.fillStyle = "#44F";
+            } else {
+                ctx.fillStyle = "#00F";
+            }
+            ctx.fillRect(window.innerWidth - 200, 0, 100, 40);
+            ctx.fillStyle = "#FFF";
+            ctx.font = "20px Arial";
+            ctx.fillText("Back", window.innerWidth - 175, 27);
+
             ctx.fillStyle = "#ADF";
             ctx.font = "20px Arial";
-            ctx.fillText(opened_folder, 35, 27);
+            ctx.fillText("<?php echo ($user["desktop_name"] == "" ? $user["username"] . "'s desktop" : $user["desktop_name"]); ?> / " + opened_folder_font.join(" / "), 35, 27);
             ctx.drawImage(folder_icon, 10, 10, 13, 20)
         }
         //folder end
@@ -392,6 +407,16 @@
         if (opened_folder != "") {
             if (pointer.pointer_position_x >= window.innerWidth - 100 && pointer.pointer_position_x <= window.innerWidth && pointer.pointer_position_y >= 0 && pointer.pointer_position_y <= 40) {
                 opened_folder = "";
+                opened_folder_font.splice(0, opened_folder_font.length);
+            }
+            if (pointer.pointer_position_x >= window.innerWidth - 200 && pointer.pointer_position_x <= window.innerWidth - 100 && pointer.pointer_position_y >= 0 && pointer.pointer_position_y <= 40) {
+                if(!pointer.is_dragging){
+                    opened_folder = opened_folder_font[opened_folder_font.length - 2];
+                    opened_folder_font = opened_folder_font.slice(0, opened_folder_font.length - 1);
+                    if(opened_folder_font.length == 0){
+                        opened_folder = "";
+                    }
+                }
             }
         } 
         
@@ -593,6 +618,7 @@
                         if (files[i].isfolder == 0) {
                             window.open("uploads/" + files[i].filename, "_blank");
                         } else {
+                            opened_folder_font.push(files[i].filename);
                             opened_folder = files[i].filename;
                         }
                         break;
