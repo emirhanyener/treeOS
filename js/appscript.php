@@ -265,7 +265,6 @@
             ctx.fillText("Change Desktop Name", 75, canvas.height - 10);
             ctx.rect(70, canvas.height - 30, 200, 30);
 
-
             if (pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 270 && pointer.pointer_position_y >= canvas.height - 60 && pointer.pointer_position_y <= canvas.height - 30)
                 ctx.fillStyle = "#DFFFDF";
             else
@@ -274,6 +273,15 @@
             ctx.fillStyle = "#333333";
             ctx.fillText("Change Background Color", 75, canvas.height - 40);
             ctx.rect(70, canvas.height - 60, 200, 30);
+
+            if (pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 270 && pointer.pointer_position_y >= canvas.height - 90 && pointer.pointer_position_y <= canvas.height - 60)
+                ctx.fillStyle = "#DFFFDF";
+            else
+                ctx.fillStyle = "#FFFFFF";
+            ctx.fillRect(70, canvas.height - 90, 200, 30);
+            ctx.fillStyle = "#333333";
+            ctx.fillText("Remove Background", 75, canvas.height - 70);
+            ctx.rect(70, canvas.height - 90, 200, 30);
         }
         //start menu end
 
@@ -316,7 +324,7 @@
             ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
             ctx.fillStyle = "#FFF6";
             ctx.font = "128px Arial";
-            ctx.fillText((new Date()).getHours() + ":" + (new Date()).getMinutes() + ":" + ((new Date()).getSeconds() < 10 ? "0" + (new Date()).getSeconds() : (new Date()).getSeconds()), window.innerWidth / 2 - 250, window.innerHeight / 2);
+            ctx.fillText((new Date()).getHours() + ":" + ((new Date()).getMinutes() < 10 ? "0" + (new Date()).getMinutes() : (new Date()).getMinutes()) + ":" + ((new Date()).getSeconds() < 10 ? "0" + (new Date()).getSeconds() : (new Date()).getSeconds()), window.innerWidth / 2 - 250, window.innerHeight / 2);
             ctx.fillStyle = "#FFF6";
             ctx.font = "32px Arial";
             ctx.fillText("<?php echo $_SESSION["username"]; ?>", 10, 35);
@@ -356,6 +364,18 @@
             }
             if (pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 270 && pointer.pointer_position_y >= canvas.height - 60 && pointer.pointer_position_y <= canvas.height - 30) {
                 document.getElementById("body").innerHTML = "<div class='center-div'><h3>Change Background Color</h3><hr><form action='change_background_color.php' method='POST'><table><tr><td>New Background Color</td><td><input type='color' name = 'color'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='submit' value='Change'></td></tr><tr><td colspan='2'><input style='width:100%;padding:5px;' type='button' onclick='close_center_div()' value='Close'></td></tr></table></form></div>";
+            }
+            if (pointer.pointer_position_x >= 70 && pointer.pointer_position_x <= 270 && pointer.pointer_position_y >= canvas.height - 90 && pointer.pointer_position_y <= canvas.height - 60) {
+                let form_data = new FormData();
+                form_data.append('filename', background_image);
+
+                let xhttp = new XMLHttpRequest();
+                xhttp.open("POST", "remove_background.php", true);
+                xhttp.onload = function (event) {
+                    background_image = "";
+                }
+
+                xhttp.send(form_data);            
             }
         }
         //start menu events end
@@ -404,7 +424,9 @@
                 let xhttp = new XMLHttpRequest();
                 xhttp.open("POST", "delete_file.php", true);
                 xhttp.onload = function (event) {
-                    files.splice(temp, 1);
+                    if(this.responseText == "1"){
+                        files.splice(temp, 1);
+                    }
                 }
 
                 xhttp.send(form_data);
