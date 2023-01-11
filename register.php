@@ -41,11 +41,11 @@
                         <td><input type="text" class="input-text" id="mail" name="mail" required></td>
                     </tr>
                     <tr>
-                        <td><canvas width="110px" height="35px" style="border:1px solid red;" id="verification_canvas"></canvas></td>
+                        <td><canvas width="110px" height="35px" style="border:2px solid red;" id="verification_canvas"></canvas></td>
                         <td><input type="text" class="input-text" name="verification_text" id="verification_text" required></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><input type="submit" class="input-button bg-c-b c-w" id="register_button" value="Register" disabled></td>
+                        <td colspan="2"><input type="submit" class="input-button bg-c-b c-w" style="opacity: 0.6;" id="register_button" value="Register" disabled></td>
                     </tr>
                     <script>
                         //random text
@@ -88,10 +88,12 @@
                         function verificaton_text_changed(){
                             if(verification_text == verification_input.value){
                                 register_button.disabled = false;
-                                canvas.style = "border: 1px solid green;";
+                                register_button.style = "opacity: 1;";
+                                canvas.style = "border: 2px solid green;";
                             } else {
                                 register_button.disabled = true;
-                                canvas.style = "border: 1px solid red;";
+                                register_button.style = "opacity: 0.6;";
+                                canvas.style = "border: 2px solid red;";
                             }
                         }
                     </script>
