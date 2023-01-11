@@ -59,8 +59,19 @@
                         var register_button = document.getElementById("register_button");
                         var canvas = document.getElementById("verification_canvas");
                         var ctx = canvas.getContext("2d");
+                        ctx.strokeStyle = "#000000";
                         ctx.font = "32px Arial";
                         ctx.fillText(verification_text,5,28);
+                        ctx.beginPath();
+                        for (let index = 1; index < 7; index++) {
+                            ctx.moveTo(0, 5 * index);
+                            ctx.lineTo(110, 5 * index);
+                        }
+                        for (let index = 1; index < 22; index++) {
+                            ctx.moveTo(5 * index, 0);
+                            ctx.lineTo(5 * index, 35);
+                        }
+                        ctx.stroke();
 
                         verification_input.addEventListener('change', verificaton_text_changed);
 
