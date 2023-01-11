@@ -50,6 +50,7 @@
                     <script>
                         //random text
                         let chars = "ABCDEFGHIJKLMNOPQRSTUVWXTZ0123456789";
+                        let c_chars = "0123456789ABCDEF";
                         let verification_text = "";
                         for (let index = 0; index < 4; index++) {
                             verification_text += chars[Math.floor(Math.random() * chars.length)];
@@ -59,7 +60,16 @@
                         var register_button = document.getElementById("register_button");
                         var canvas = document.getElementById("verification_canvas");
                         var ctx = canvas.getContext("2d");
-                        ctx.strokeStyle = "#000000";
+                        var front_stroke_color = "#";
+                        var text_stroke_color = "#";
+                        for (let index = 0; index < 3; index++) {
+                            front_stroke_color += c_chars[Math.floor(Math.random() * c_chars.length)];
+                        }
+                        for (let index = 0; index < 3; index++) {
+                            text_stroke_color += c_chars[Math.floor(Math.random() * 10)];
+                        }
+                        ctx.strokeStyle = front_stroke_color;
+                        ctx.fillStyle = text_stroke_color;
                         ctx.font = "32px Arial";
                         ctx.fillText(verification_text,5,28);
                         ctx.beginPath();
