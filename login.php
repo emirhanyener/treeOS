@@ -40,9 +40,9 @@ session_start();
                 <form action="login.php" class="center-form" method="POST">
                     <table class="form-table">
                         <tr><td><label for="username" class="form-label">Username: </label></td>
-                        <td><input type="text" class="input-text" id="username" name="username"></td></tr>
+                        <td><input type="text" class="input-text" id="username" name="username" required></td></tr>
                         <tr><td><label for="pass" class="form-label">Password: </label></td>
-                        <td><input type="text" class="input-text" style="-webkit-text-security: disc;" id="pass" name="pass"></td></tr>
+                        <td><input type="text" class="input-text" style="-webkit-text-security: disc;" id="pass" name="pass" required></td></tr>
                         <tr><td colspan="2"><input type="submit" class="input-button bg-c-b c-w" value="Login"></td><tr>
                     </table>
                 </form>
