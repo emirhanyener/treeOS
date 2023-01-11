@@ -30,19 +30,50 @@
                 <table class="form-table">
                     <tr>
                         <td><label for="username" class="form-label">Username</label></td>
-                        <td><input type="text" class="input-text" id="username" name="username"></td>
+                        <td><input type="text" class="input-text" id="username" name="username" required></td>
                     </tr>
                     <tr>
                         <td><label for="pass" class="form-label">Password</label></td>
-                        <td><input type="text" class="input-text" style="-webkit-text-security: disc;" id="pass" name="pass"></td>
+                        <td><input type="text" class="input-text" style="-webkit-text-security: disc;" id="pass" name="pass" required></td>
                     </tr>
                     <tr>
                         <td><label for="mail" class="form-label">Email address</label></td>
-                        <td><input type="text" class="input-text" id="mail" name="mail"></td>
+                        <td><input type="text" class="input-text" id="mail" name="mail" required></td>
                     </tr>
                     <tr>
-                        <td colspan="2"><input type="submit" class="input-button bg-c-b c-w" value="Register"></td>
+                        <td><canvas width="110px" height="35px" style="border:1px solid red;" id="verification_canvas"></canvas></td>
+                        <td><input type="text" class="input-text" name="verification_text" id="verification_text" required></td>
                     </tr>
+                    <tr>
+                        <td colspan="2"><input type="submit" class="input-button bg-c-b c-w" id="register_button" value="Register" disabled></td>
+                    </tr>
+                    <script>
+                        //random text
+                        let chars = "ABCDEFGHIJKLMNOPQRSTUVWXTZ0123456789";
+                        let verification_text = "";
+                        for (let index = 0; index < 4; index++) {
+                            verification_text += chars[Math.floor(Math.random() * chars.length)];
+                        }
+
+                        var verification_input = document.getElementById("verification_text");
+                        var register_button = document.getElementById("register_button");
+                        var canvas = document.getElementById("verification_canvas");
+                        var ctx = canvas.getContext("2d");
+                        ctx.font = "32px Arial";
+                        ctx.fillText(verification_text,5,28);
+
+                        verification_input.addEventListener('change', verificaton_text_changed);
+
+                        function verificaton_text_changed(){
+                            if(verification_text == verification_input.value){
+                                register_button.disabled = false;
+                                canvas.style = "border: 1px solid green;";
+                            } else {
+                                register_button.disabled = true;
+                                canvas.style = "border: 1px solid red;";
+                            }
+                        }
+                    </script>
                 </table>
             </form>
             <?php
