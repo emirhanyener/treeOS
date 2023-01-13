@@ -152,7 +152,7 @@
         files.forEach(item => {
             if (item.foldername == opened_folder) {
                 if (pointer.pointer_position_x >= item.position_x - 20 && pointer.pointer_position_x <= item.position_x + 90 && pointer.pointer_position_y >= item.position_y - 5 && pointer.pointer_position_y <= item.position_y + 140) {
-                    ctx.fillStyle = "#3368";
+                    ctx.fillStyle = "#9995";
                     ctx.fillRect(item.position_x - 20, item.position_y - 5, 110, 145)
                 }
                 if (item.isfolder == 0) {
@@ -175,11 +175,15 @@
                 }
 
                 ctx.fillStyle = "#FFFFFF";
+                ctx.strokeStyle = "#000";
+                ctx.lineWidth = 0.2;
                 ctx.font = "18px Arial";
                 if (item.isfolder == 0) {
                     ctx.fillText((item.filename.split("_")[2].split(".")[0].length > 6 ? item.filename.split("_")[2].split(".")[0].substring(0, 6) + "." : item.filename.split("_")[2].split(".")[0]) + "." + item.filename.split("_")[2].split(".")[1], item.position_x + (item.filename.split("_")[2].split(".")[0].length >= 6 ? - 15 : + 0), item.position_y + 130);
+                    ctx.strokeText((item.filename.split("_")[2].split(".")[0].length > 6 ? item.filename.split("_")[2].split(".")[0].substring(0, 6) + "." : item.filename.split("_")[2].split(".")[0]) + "." + item.filename.split("_")[2].split(".")[1], item.position_x + (item.filename.split("_")[2].split(".")[0].length >= 6 ? - 15 : + 0), item.position_y + 130);
                 } else {
                     ctx.fillText((item.filename.length > 10 ? item.filename.substring(0, 10) + "..." : item.filename), item.position_x + (item.filename.length >= 10 ? - 15 : + 0), item.position_y + 130);
+                    ctx.strokeText((item.filename.length > 10 ? item.filename.substring(0, 10) + "..." : item.filename), item.position_x + (item.filename.length >= 10 ? - 15 : + 0), item.position_y + 130);
                 }
             }
         });
