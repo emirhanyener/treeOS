@@ -30,70 +30,81 @@
                 <table class="form-table">
                     <tr>
                         <td><label for="username" class="form-label">Username</label></td>
-                        <td><input type="text" class="input-text" id="username" name="username" required></td>
+                        <td><input type="text" class="input-text" placeholder="username" id="username" name="username" required></td>
                     </tr>
                     <tr>
                         <td><label for="pass" class="form-label">Password</label></td>
-                        <td><input type="text" class="input-text" style="-webkit-text-security: disc;" id="pass" name="pass" required></td>
+                        <td><input type="text" class="input-text" placeholder="123456" style="-webkit-text-security: disc;" id="pass" name="pass" required></td>
                     </tr>
                     <tr>
                         <td><label for="mail" class="form-label">Email address</label></td>
-                        <td><input type="text" class="input-text" id="mail" name="mail" required></td>
+                        <td><input type="text" class="input-text" placeholder="example@domain.com" id="mail" name="mail" required></td>
                     </tr>
                     <tr>
-                        <td><canvas width="110px" height="35px" style="border:2px solid red;" id="verification_canvas"></canvas></td>
-                        <td><input type="text" class="input-text" name="verification_text" id="verification_text" required></td>
+                        <td><canvas width="110px" height="35px" style="border:2px solid red;cursor:pointer;" id="verification_canvas"></canvas></td>
+                        <td><input type="text" class="input-text" placeholder="ABCD" name="verification_text" id="verification_text" required></td>
                     </tr>
                     <tr>
                         <td colspan="2"><input type="submit" class="input-button bg-c-b c-w" style="opacity: 0.6;" id="register_button" value="Register" disabled></td>
                     </tr>
                     <script>
-                        //random text
                         let chars = "ABCDEFGHIJKLMNOPQRSTUVWXTZ0123456789";
                         let c_chars = "0123456789ABCDEF";
                         let verification_text = "";
-                        for (let index = 0; index < 4; index++) {
-                            verification_text += chars[Math.floor(Math.random() * chars.length)];
-                        }
-
                         var verification_input = document.getElementById("verification_text");
                         var register_button = document.getElementById("register_button");
                         var canvas = document.getElementById("verification_canvas");
                         var ctx = canvas.getContext("2d");
                         var front_stroke_color = "#";
                         var text_stroke_color = "#";
-                        for (let index = 0; index < 3; index++) {
-                            front_stroke_color += c_chars[Math.floor(Math.random() * c_chars.length)];
-                        }
-                        for (let index = 0; index < 3; index++) {
-                            text_stroke_color += c_chars[Math.floor(Math.random() * 10)];
-                        }
-                        ctx.strokeStyle = front_stroke_color;
-                        ctx.fillStyle = text_stroke_color;
-                        ctx.font = "32px Arial";
-                        ctx.fillText(verification_text,5,28);
-                        ctx.beginPath();
-                        for (let index = 1; index < 7; index++) {
-                            ctx.moveTo(0, 5 * index);
-                            ctx.lineTo(110, 5 * index);
-                        }
-                        for (let index = 1; index < 22; index++) {
-                            ctx.moveTo(5 * index, 0);
-                            ctx.lineTo(5 * index, 35);
-                        }
-                        ctx.stroke();
-
+                        
                         verification_input.addEventListener('change', verificaton_text_changed);
+                        canvas.addEventListener('mousedown', create_new_verification_text);
+                        create_new_verification_text();
+
+                        function create_new_verification_text(){
+                            verification_text = "";
+                            front_stroke_color = "#";
+                            text_stroke_color = "#";
+                            ctx.fillStyle = "#FFFFFF";
+                            ctx.fillRect(0, 0, 110, 35);
+                            //random text
+                            for (let index = 0; index < 4; index++) {
+                                verification_text += chars[Math.floor(Math.random() * chars.length)];
+                            }
+                            for (let index = 0; index < 3; index++) {
+                                front_stroke_color += c_chars[Math.floor(Math.random() * c_chars.length)];
+                            }
+                            for (let index = 0; index < 3; index++) {
+                                text_stroke_color += c_chars[Math.floor(Math.random() * 10)];
+                            }
+                            ctx.strokeStyle = front_stroke_color;
+                            ctx.fillStyle = text_stroke_color;
+                            ctx.font = "32px Arial";
+                            ctx.fillText(verification_text,5,28);
+                            ctx.beginPath();
+                            for (let index = 1; index < 7; index++) {
+                                ctx.moveTo(0, 5 * index);
+                                ctx.lineTo(110, 5 * index);
+                            }
+                            for (let index = 1; index < 22; index++) {
+                                ctx.moveTo(5 * index, 0);
+                                ctx.lineTo(5 * index, 35);
+                            }
+                            ctx.stroke();
+                            verificaton_text_changed();
+                        }
+
 
                         function verificaton_text_changed(){
                             if(verification_text == verification_input.value){
                                 register_button.disabled = false;
                                 register_button.style = "opacity: 1;";
-                                canvas.style = "border: 2px solid green;";
+                                canvas.style = "border: 2px solid green;cursor:pointer;";
                             } else {
                                 register_button.disabled = true;
                                 register_button.style = "opacity: 0.6;";
-                                canvas.style = "border: 2px solid red;";
+                                canvas.style = "border: 2px solid red;cursor:pointer;";
                             }
                         }
                     </script>
