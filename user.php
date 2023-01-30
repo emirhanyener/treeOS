@@ -11,8 +11,14 @@ session_start();
                 if(isset($_SESSION["login"])){
             ?>
                 <pageheader>User</pageheader>
-                <?php echo $_SESSION["username"]; ?><br>
-                <?php echo $_SESSION["usermail"]; ?><br>
+                <form action="change_password.php" method="POST">
+                <table>
+                    <tr><td>Username</td><td><input type="text" value="<?php echo $_SESSION['username']; ?>" name="username" readonly></td></tr>
+                    <tr><td>Mail</td><td><input type="text" value="<?php echo $_SESSION['usermail']; ?>" name="mail" readonly></td></tr>
+                    <tr><td>Password</td><td><input type="text" style="-webkit-text-security: disc;" name="password"></td></tr>
+                    <tr><td colspan="2"><input type="submit" value="Change Password"></td></tr>
+                </table>
+                </form>
                 <br>
                 <a href = "logout.php" class="c-r">Logout</a>
             <?php
