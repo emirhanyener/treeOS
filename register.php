@@ -8,8 +8,8 @@
     <?php 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($db->query("select * from users where username = '" . str_replace("\"","",str_replace("'","",$_POST["username"])) . "' or mail = '" . str_replace("\"","",str_replace("'","",$_POST["mail"])) . "'", PDO::FETCH_ASSOC)->rowCount() == 0) {
-                $query = $db->query("INSERT INTO users (username,password,mail,mail_active,is_admin,desktop_name,background_color,background_image,mail_verification) VALUES ('" . str_replace("\"","",str_replace("'","",$_POST["username"])) . "','" . str_replace("\"","",str_replace("'","",$_POST["pass"])) . "','" . str_replace("\"","",str_replace("'","",$_POST["mail"])) . "',0,0,'','','','".hash("md5",$_POST["username"])."')", PDO::FETCH_ASSOC);
-                mail($_POST["mail"], "treeOS mail verification", "Click this link for mail verification:{domain_name}/mail_verification.php?hash=".hash("md5",$_POST["username"]), "From:treeOS@testmail.test");
+                $query = $db->query("INSERT INTO users (username,password,mail,mail_active,is_admin,desktop_name,background_color,background_image,mail_verification) VALUES ('" . str_replace("\"","",str_replace("'","",$_POST["username"])) . "','" . str_replace("\"","",str_replace("'","",$_POST["pass"])) . "','" . str_replace("\"","",str_replace("'","",$_POST["mail"])) . "',1,0,'','','','".hash("md5",$_POST["username"])."')", PDO::FETCH_ASSOC);
+                //mail($_POST["mail"], "treeOS mail verification", "Click this link for mail verification:{domain_name}/mail_verification.php?hash=".hash("md5",$_POST["username"]), "From:treeOS@testmail.test");
                 header("Location: login.php?d=verification&mail=".$_POST["mail"]);
             } else {
                 header("Location: register.php?d=error");
